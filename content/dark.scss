@@ -1,0 +1,2 @@
+@use '@anglr/dynamic/styles/themes/dark' as dynamicTheme;
+@use 'scss/theme/theme' with ($themeName: 'dark', $tooltipTheme: 'light', $datetimeTheme: 'dark', $dynamicTheme: dynamicTheme.defineTheme());

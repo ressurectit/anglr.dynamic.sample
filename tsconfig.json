@@ -1,0 +1,62 @@
+{
+    "compilerOptions":
+    {
+        "target": "es2020",
+        "module": "es2020",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitOverride": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "newLine": "lf",
+        "moduleResolution": "node",
+        "outDir": "wwwroot/app",
+        "baseUrl": ".",
+        "paths": 
+        {
+            "positions": ["node_modules/@anglr/common/positions/src/types/positions.typings.d.ts"]
+        },
+        "lib":
+        [
+            "es2020",
+            "dom"
+        ],
+        "types":
+        [
+            "node",
+        ],
+        "plugins":
+        [
+            {
+                "name": "@angular/language-service"
+            }
+        ]
+    },
+    "files":
+    [
+        "config/global.d.ts"
+    ],
+    "include":
+    [
+        "app/**/*.ts",
+    ],
+    "exclude":
+    [
+        "node_modules"
+    ],
+    "angularCompilerOptions":
+    {
+        "strictInjectionParameters": true,
+        "strictTemplates": true
+    }
+}
