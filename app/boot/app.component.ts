@@ -15,6 +15,7 @@ import {loaderTrigger, routeAnimationTrigger} from './app.component.animations';
 import {SettingsService} from '../services/settings';
 import {SettingsGeneral, SettingsDebug} from '../config';
 import version from '../../config/version.json';
+import {DynamicRoutesService} from '../services/dynamicRoutes';
 
 /**
  * Application entry component
@@ -107,6 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
                 translateSvc: TranslateService,
                 private _changeDetector: ChangeDetectorRef,
                 private _appHotkeys: AppHotkeysService,
+                private _dynamicRoutes: DynamicRoutesService,
                 settings: SettingsService,
                 @Inject(LOGGER) logger: Logger,
                 @Inject(DOCUMENT) document: Document,)
@@ -174,6 +176,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
      */
     public async ngOnInit(): Promise<void>
     {
+        await this._dynamicRoutes.initialize();
     }
 
     //######################### public methods - implementation of AfterViewInit #########################
