@@ -26,6 +26,11 @@
             "$ref": "#/definitions/roles",
             "description": "Displaying home page"
         },
+        "dynamicRoutes-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page for registered dynamic routes"
+        },
         "logging-settings":
         {
             "$ref": "#/definitions/roles",

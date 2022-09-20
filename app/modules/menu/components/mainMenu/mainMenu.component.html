@@ -1,5 +1,6 @@
 <div *authorize="'authenticated'" class="flex-row">
-    <a routerLink="/" routerLinkActive="active" class="margin-right-extra-small">Home</a>
+    <a routerLink="/" routerLinkActive="active" class="margin-right-small">Home</a>
+    <a routerLink="/admin/dynamicRoutes" routerLinkActive="active" class="margin-right-small">Dynamic routes</a>
     <div class="flex-1"></div>
     <a (click)="logout()">Logout</a>
     <a (click)="openSettings()" class="fas fa-cog"></a>

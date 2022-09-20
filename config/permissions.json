@@ -1,7 +1,8 @@
 {
     "$schema": "./permissions.schema.json",
-    "home-page":        ["ADMIN", "USER"],
-    "logging-settings": ["ADMIN"],
-    "debug-settings":   ["ADMIN"],
-    "debugInfo":        ["ADMIN"]
+    "home-page":             ["ADMIN", "USER"],
+    "dynamicRoutes-page":    ["ADMIN"],
+    "logging-settings":      ["ADMIN"],
+    "debug-settings":        ["ADMIN"],
+    "debugInfo":             ["ADMIN"]
 }
