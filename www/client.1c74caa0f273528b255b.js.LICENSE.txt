@@ -1,2 +1,0 @@
-/*! modernizr 3.6.0 (Custom Build) | MIT *
- * https://modernizr.com/download/?-arrow-bloburls-cssgrid_cssgridlegacy-customelements-flexbox-inlinesvg-serviceworker-svg-websockets-webworkers-setclasses !*/

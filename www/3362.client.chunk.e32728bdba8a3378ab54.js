@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[3362],{33362:(e,s,n)=>{n.r(s),n.d(s,{default:()=>u});const u=["richTextBlock"]}}]);
+//# sourceMappingURL=3362.client.chunk.e32728bdba8a3378ab54.js.map
