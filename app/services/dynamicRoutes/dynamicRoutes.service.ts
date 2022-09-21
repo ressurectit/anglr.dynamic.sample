@@ -89,6 +89,5 @@ export class DynamicRoutesService
         });
 
         this._router.resetConfig(this._router.config);
-        console.log(this._router.config);
     }
 }

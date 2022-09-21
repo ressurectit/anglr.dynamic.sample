@@ -36,6 +36,11 @@
             "$ref": "#/definitions/roles",
             "description": "Displaying admin page for registered dynamic route page"
         },
+        "layoutEditor-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page of layout editor for dynamic content"
+        },
         "logging-settings":
         {
             "$ref": "#/definitions/roles",

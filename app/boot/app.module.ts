@@ -8,6 +8,8 @@ import {ProgressIndicatorModule} from '@anglr/common';
 import {InternalServerErrorModule} from '@anglr/error-handling';
 import {NotificationsGlobalModule} from '@anglr/notifications';
 import {TranslateModule, TranslateLoader, MissingTranslationHandler} from '@ngx-translate/core';
+import {DndModule} from '@ng-dnd/core';
+import {HTML5Backend} from 'react-dnd-html5-backend';
 import {HotkeyModule} from 'angular2-hotkeys';
 
 import {AppComponent} from './app.component';
@@ -38,6 +40,10 @@ import {ReportMissingTranslationService} from '../services/missingTranslation';
         HotkeyModule,
         MenuModule,
         ConsoleLogModule.forRoot(),
+        DndModule.forRoot(
+        {
+            backend: HTML5Backend
+        }),
         TranslateModule.forRoot(
         {
             loader: <ClassProvider>

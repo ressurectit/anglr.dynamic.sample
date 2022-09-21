@@ -3,6 +3,7 @@
     "home-page":               ["ADMIN", "USER"],
     "dynamicRoutes-page":      ["ADMIN"],
     "dynamicRouteDetail-page": ["ADMIN"],
+    "layoutEditor-page":       ["ADMIN"],
     "logging-settings":        ["ADMIN"],
     "debug-settings":          ["ADMIN"],
     "debugInfo":               ["ADMIN"]
