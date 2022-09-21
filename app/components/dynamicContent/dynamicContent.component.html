@@ -1,4 +1,5 @@
-<div>dynamic</div>
-<a class="btn-icon" routerLink="/admin/layout">
-    <span>edit</span>
+<a class="btn-icon" [routerLink]="['/admin/layout', template]" *authorize="'layoutEditor-page'">
+    <span>edit layout</span>
 </a>
+
+<ng-container [layoutComponentRenderer]="metadata"></ng-container>

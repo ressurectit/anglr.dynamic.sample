@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {GoBackModule} from '@anglr/common';
 import {ModuleRoutes} from '@anglr/common/router';
 import {DynamicLayoutRelationsEditorModule} from '@anglr/dynamic/layout-relations';
 
@@ -11,6 +12,7 @@ import {components} from './dynamicContent.routes';
 {
     imports:
     [
+        GoBackModule,
         DynamicLayoutRelationsEditorModule,
     ],
     declarations:

@@ -1,18 +1,21 @@
-import {Component, ChangeDetectionStrategy, FactoryProvider} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Component, ChangeDetectionStrategy, FactoryProvider, OnInit} from '@angular/core';
+import {ActivatedRoute, RouterModule} from '@angular/router';
 import {provideLayoutRelationsCustomComponents} from '@anglr/dynamic/layout-relations';
 import {provideCssLayoutRelations} from '@anglr/dynamic/css-components';
 import {provideTinyMceLayoutRelations} from '@anglr/dynamic/tinymce-components';
 import {provideHandlebarsLayoutRelations} from '@anglr/dynamic/handlebars-components';
 import {provideRestLayoutRelations} from '@anglr/dynamic/rest-components';
-import {LayoutComponentMetadata, LAYOUT_METADATA_STORAGE} from '@anglr/dynamic/layout';
+import {LayoutComponentMetadata, LAYOUT_METADATA_STORAGE, LayoutComponentRendererSADirective} from '@anglr/dynamic/layout';
 import {RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relations';
 import {MetadataStorage} from '@anglr/dynamic';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
+import {AuthorizationModule} from '@anglr/authentication';
+import {nameof} from '@jscrpt/common';
 
 import {LayoutRelationsMetadata} from '../../misc/interfaces';
 import {StoreDataService} from '../../services/storeData';
 import {createStoreDataServiceFactory} from '../../misc/factories';
+import {DynamicRouteData} from '../../services/dynamicRoutes';
 
 /**
  * Component used displaying dynamic content pages
@@ -26,6 +29,8 @@ import {createStoreDataServiceFactory} from '../../misc/factories';
     imports:
     [
         RouterModule,
+        AuthorizationModule,
+        LayoutComponentRendererSADirective,
     ],
     providers:
     [
@@ -50,6 +55,41 @@ import {createStoreDataServiceFactory} from '../../misc/factories';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicContentSAComponent
+export class DynamicContentSAComponent implements OnInit
 {
+    //######################### protected properties - template bindings #########################
+
+    /**
+     * Current template that is being displayed
+     */
+    protected template: string|undefined|null;
+
+    /**
+     * Current metadata
+     */
+    protected metadata: LayoutComponentMetadata|null = null;
+
+    //######################### constructor #########################
+    constructor(private _route: ActivatedRoute,
+                private _store: StoreDataService<LayoutRelationsMetadata>,)
+    {
+    }
+
+    //######################### public methods - implementation of OnInit #########################
+    
+    /**
+     * Initialize component
+     */
+    public ngOnInit(): void
+    {
+        this._route.data.subscribe(data =>
+        {
+            this.template = data[nameof<DynamicRouteData>('template')];
+
+            if(this.template)
+            {
+                this.metadata = this._store.getData(this.template)?.layout ?? null;
+            }
+        });
+    }
 }

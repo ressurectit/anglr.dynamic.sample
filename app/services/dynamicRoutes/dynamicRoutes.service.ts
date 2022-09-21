@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {PERMANENT_STORAGE, PermanentStorage} from '@anglr/common';
 import {PromiseOr} from '@jscrpt/common';
 
-import {DynamicRoute} from './dynamicRoutes.interface';
+import {DynamicRoute, DynamicRouteData} from './dynamicRoutes.interface';
 import {DynamicContentSAComponent} from '../../components';
 
 const DYNAMIC_ROUTES = 'DYNAMIC_ROUTES';
@@ -70,6 +70,9 @@ export class DynamicRoutesService
 
     //######################### private methods #########################
 
+    /**
+     * Sets dynamic routes to router
+     */
     private _setRoutes(): void
     {
         const dynamicContentRoute = this._router.config.find(itm => itm.path == 'dynamicContent');
@@ -84,7 +87,10 @@ export class DynamicRoutesService
             return {
                 path: itm.path,
                 component: DynamicContentSAComponent,
-                data: {template: itm.template},
+                data: <DynamicRouteData>
+                {
+                    template: itm.template
+                },
             };
         });
 

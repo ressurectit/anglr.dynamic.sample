@@ -1,4 +1,15 @@
 /**
+ * Dynamic route data
+ */
+export interface DynamicRouteData
+{
+    /**
+     * Name of layout relations template that represents page contents
+     */
+    template: string;
+}
+
+/**
  * Dynamic route definition
  */
 export interface DynamicRoute

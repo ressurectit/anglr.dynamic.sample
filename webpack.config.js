@@ -329,7 +329,8 @@ export default [function(options, args)
                 isNgsw: ngsw,
                 jsDevMode: !prod,
                 ...prod ? {ngDevMode: false} : {},
-                ngI18nClosureMode: false
+                ngI18nClosureMode: false,
+                ngDesignerMetadata: true,
             }),
             new MiniCssExtractPlugin(
             {
