@@ -4,6 +4,11 @@ import {AuthenticationService} from '@anglr/authentication';
 import {TitledDialogService} from '@anglr/common/material';
 
 import {UserSettingsSAComponent} from '../../../../components';
+import {createStoreDataServiceFactory} from '../../../../misc/factories';
+import {StoreDataService} from '../../../../services/storeData';
+import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
+import {demoDetailLayout, demoDetailRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
+import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
 
 /**
  * Component used for displaying application main menu
@@ -12,7 +17,10 @@ import {UserSettingsSAComponent} from '../../../../components';
 {
     selector: 'main-menu',
     templateUrl: 'mainMenu.component.html',
-    // styleUrls: ['mainMenu.component.scss'],
+    providers:
+    [
+        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainMenuComponent
@@ -20,7 +28,9 @@ export class MainMenuComponent
     //######################### constructor #########################
     constructor(private _authSvc: AuthenticationService<any>,
                 private _router: Router,
-                private _dialog: TitledDialogService)
+                private _dialog: TitledDialogService,
+                private _store: StoreDataService<LayoutRelationsMetadata>,
+                private _dynamicRoutes: DynamicRoutesService,)
     {
     }
 
@@ -37,6 +47,58 @@ export class MainMenuComponent
             {
                 this._router.navigate(['/login']);
             });
+    }
+
+    /**
+     * Loads demo data
+     */
+    public async loadDemo(event: MouseEvent): Promise<void>
+    {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let overview = this._store.getData('overview');
+
+        if(!overview)
+        {
+            overview =
+            {
+                layout: demoOverviewLayout,
+                relations: demoOverviewRelations,
+            };
+            
+            this._store.setData('overview', overview);
+        }
+
+        let detail = this._store.getData('detail');
+
+        if(!detail)
+        {
+            detail =
+            {
+                layout: demoDetailLayout,
+                relations: [],
+            };
+            
+            this._store.setData('detail', detail);
+        }
+
+        const routes = this._dynamicRoutes.routes ?? [];
+        const overviewRoute = routes.find(itm => itm.template == 'overview');
+
+        if(!overviewRoute)
+        {
+            await this._dynamicRoutes.addRoute(demoOverviewRoute);
+        }
+
+        const detialRoute = routes.find(itm => itm.template == 'detail');
+
+        if(!detialRoute)
+        {
+            await this._dynamicRoutes.addRoute(demoDetailRoute);
+        }
+
+        window.location.reload();
     }
 
     /**
