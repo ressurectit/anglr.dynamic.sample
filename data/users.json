@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Testo",
+        "surname": "Steron",
+        "email": "test@steron.sk"
+    },
+    {
+        "name": "Testo1",
+        "surname": "Steron1",
+        "email": "test1@steron.sk"
+    },
+    {
+        "name": "Testo22",
+        "surname": "Steron22",
+        "email": "test22@steron.sk"
+    },
+    {
+        "name": "Testo333",
+        "surname": "Steron333",
+        "email": "test@steron.com"
+    },
+    {
+        "name": "Testo444",
+        "surname": "Steron444",
+        "email": "test@steron.eu"
+    },
+    {
+        "name": "Testo777",
+        "surname": "Steron231",
+        "email": "test@gmail.sk"
+    },
+    {
+        "name": "Testo123",
+        "surname": "Steron321",
+        "email": "test@steron123.sk"
+    }
+]

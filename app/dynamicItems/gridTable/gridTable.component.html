@@ -1,0 +1,13 @@
+<ng-grid [gridOptions]="gridOptions">
+    <basic-table-metadata>
+        <basic-table-column id="name" name="name" title="Name"></basic-table-column>
+        <basic-table-column id="surname" name="surname" title="Surname"></basic-table-column>
+        <basic-table-column id="email" name="email" title="E-mail"></basic-table-column>
+
+        <basic-table-column id="detail" title="detail" [titleVisible]="false">
+            <ng-template #bodyTemplate>
+                <a>detail</a>
+            </ng-template>
+        </basic-table-column>
+    </basic-table-metadata>
+</ng-grid>

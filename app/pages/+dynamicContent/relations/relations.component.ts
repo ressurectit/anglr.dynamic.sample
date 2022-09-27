@@ -15,6 +15,7 @@ import {LayoutRelationsMetadata} from '../../../misc/interfaces';
 import {DemoCustomComponentsRegister} from '../../../services/demoCustomComponentsRegister';
 import {DemoRelationsPackageManager} from '../../../services/demoRelationsPackageManager/demoRelationsPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
+import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
 import {ComplexStaticRegister} from '../misc';
 
 /**
@@ -38,6 +39,7 @@ import {ComplexStaticRegister} from '../misc';
         provideRestLayoutRelationsEditor(),
         provideTinyMceLayoutRelationsEditor(),
         provideCssLayoutRelationsEditor(),
+        provideSampleLayoutRelationsEditor(),
         provideEditorRelationsCustomComponents(provideLayoutRelationsEditorWithStatic(ComplexStaticRegister), DemoCustomComponentsRegister),
         <ClassProvider>
         {

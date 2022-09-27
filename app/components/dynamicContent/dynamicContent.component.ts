@@ -10,12 +10,14 @@ import {RelationsManager, RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relat
 import {MetadataStorage} from '@anglr/dynamic';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
 import {AuthorizationModule} from '@anglr/authentication';
+import {provideFormLayoutRelations} from '@anglr/dynamic/form';
 import {nameof} from '@jscrpt/common';
 
 import {LayoutRelationsMetadata} from '../../misc/interfaces';
 import {StoreDataService} from '../../services/storeData';
 import {createStoreDataServiceFactory} from '../../misc/factories';
 import {DynamicRouteData} from '../../services/dynamicRoutes';
+import {provideSampleLayoutRelations} from '../../dynamicItems/utils';
 
 /**
  * Component used displaying dynamic content pages
@@ -51,6 +53,8 @@ import {DynamicRouteData} from '../../services/dynamicRoutes';
         provideTinyMceLayoutRelations(),
         provideHandlebarsLayoutRelations(),
         provideRestLayoutRelations(),
+        provideFormLayoutRelations(),
+        provideSampleLayoutRelations(),
         createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush

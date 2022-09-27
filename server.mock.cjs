@@ -23,4 +23,7 @@ module.exports = function(app)
 
     //LOAD MOCK LOGGER RESOURCE
     require('./mocks/mockLogger/index.cjs')(app);
+
+    //LOAD MOCK DATA RESOURCE
+    require('./mocks/data/index.cjs')(app);
 };

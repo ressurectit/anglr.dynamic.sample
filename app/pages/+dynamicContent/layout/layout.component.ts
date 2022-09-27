@@ -17,6 +17,7 @@ import {LayoutRelationsMetadata} from '../../../misc/interfaces';
 import {DemoCustomComponentsRegister} from '../../../services/demoCustomComponentsRegister';
 import {DemoLayoutPackageManager} from '../../../services/demoLayoutPackageManager/demoLayoutPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
+import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
 
 /**
  * Component used for displaying layout editor
@@ -40,6 +41,7 @@ import {createStoreDataServiceFactory} from '../../../misc/factories';
         provideCssLayoutEditor(),
         provideTinyMceLayoutEditor(),
         provideHandlebarsLayoutEditor(),
+        provideSampleLayoutEditor(),
         provideEditorLayoutCustomComponents([], DemoCustomComponentsRegister),
         <ClassProvider>
         {
