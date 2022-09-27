@@ -6,7 +6,7 @@ import {provideTinyMceLayoutRelations} from '@anglr/dynamic/tinymce-components';
 import {provideHandlebarsLayoutRelations} from '@anglr/dynamic/handlebars-components';
 import {provideRestLayoutRelations} from '@anglr/dynamic/rest-components';
 import {LayoutComponentMetadata, LAYOUT_METADATA_STORAGE, LayoutComponentRendererSADirective} from '@anglr/dynamic/layout';
-import {RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relations';
+import {RelationsManager, RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relations';
 import {MetadataStorage} from '@anglr/dynamic';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
 import {AuthorizationModule} from '@anglr/authentication';
@@ -71,7 +71,8 @@ export class DynamicContentSAComponent implements OnInit
 
     //######################### constructor #########################
     constructor(private _route: ActivatedRoute,
-                private _store: StoreDataService<LayoutRelationsMetadata>,)
+                private _store: StoreDataService<LayoutRelationsMetadata>,
+                private _relationsManager: RelationsManager,)
     {
     }
 
@@ -88,7 +89,9 @@ export class DynamicContentSAComponent implements OnInit
 
             if(this.template)
             {
-                this.metadata = this._store.getData(this.template)?.layout ?? null;
+                const metadata = this._store.getData(this.template); 
+                this.metadata = metadata?.layout ?? null;
+                this._relationsManager.setRelations(metadata?.relations ?? []);
             }
         });
     }

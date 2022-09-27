@@ -429,4 +429,46 @@ export default [function(options, args)
     }
 
     return config;
+}, 
+function(_, args)
+{
+    var prod = args && args.mode == 'production' || false;
+    const distPath = prod ? 'www' : 'wwwroot/dist';
+    
+    return {
+        
+        mode: 'development',
+        entry: 
+        {
+            "editor.worker": 'monaco-editor/esm/vs/editor/editor.worker.js',
+            "json.worker": 'monaco-editor/esm/vs/language/json/json.worker',
+            "css.worker": 'monaco-editor/esm/vs/language/css/css.worker',
+            "html.worker": 'monaco-editor/esm/vs/language/html/html.worker',
+            "ts.worker": 'monaco-editor/esm/vs/language/typescript/ts.worker'
+        },
+        output: 
+        {
+            globalObject: 'self',
+            path: path.join(dirName, distPath),
+            filename: '[name].js'
+        },
+        plugins:
+        [
+            new MiniCssExtractPlugin(
+            {
+                filename: '[name].[hash].css',
+                chunkFilename: '[id].[hash].css',
+            }),
+        ],
+        module: 
+        {
+            rules: 
+            [
+                {
+                    test: /\.css$/,
+                    use: getCssLoaders()
+                }
+            ]
+        }
+    };
 }];

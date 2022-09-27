@@ -4,6 +4,7 @@
     "dynamicRoutes-page":      ["ADMIN"],
     "dynamicRouteDetail-page": ["ADMIN"],
     "layoutEditor-page":       ["ADMIN"],
+    "relationsEditor-page":    ["ADMIN"],
     "logging-settings":        ["ADMIN"],
     "debug-settings":          ["ADMIN"],
     "debugInfo":               ["ADMIN"]

@@ -1,5 +1,9 @@
-<a class="btn-icon" [routerLink]="['/admin/layout', template]" *authorize="'layoutEditor-page'">
+<a class="btn btn-primary" [routerLink]="['/admin/layout', template]" *authorize="'layoutEditor-page'">
     <span>edit layout</span>
+</a>
+
+<a class="btn btn-primary" [routerLink]="['/admin/relations', template]" *authorize="'relationsEditor-page'">
+    <span>edit relations</span>
 </a>
 
 <ng-container [layoutComponentRenderer]="metadata"></ng-container>

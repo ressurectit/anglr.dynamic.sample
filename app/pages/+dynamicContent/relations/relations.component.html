@@ -1,0 +1,13 @@
+<div class="flex-row">
+    <button type="button" class="btn btn-info" goBack>
+        <span class="fas fa-arrow-left"></span>
+        <span>back</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="save()">
+        <span class="fas fa-save"></span>
+        <span>save</span>
+    </button>
+</div>
+
+<relations-editor class="flex-1" [metadata]="metadata"></relations-editor>

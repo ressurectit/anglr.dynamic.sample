@@ -41,6 +41,11 @@
             "$ref": "#/definitions/roles",
             "description": "Displaying admin page of layout editor for dynamic content"
         },
+        "relationsEditor-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page of relations editor for dynamic content"
+        },
         "logging-settings":
         {
             "$ref": "#/definitions/roles",
