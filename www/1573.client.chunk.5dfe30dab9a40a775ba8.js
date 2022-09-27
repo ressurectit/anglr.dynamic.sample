@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[1573],{51573:(e,s,a)=>{a.r(s),a.d(s,{default:()=>n});const n=["triggerData"]}}]);
+//# sourceMappingURL=1573.client.chunk.5dfe30dab9a40a775ba8.js.map
