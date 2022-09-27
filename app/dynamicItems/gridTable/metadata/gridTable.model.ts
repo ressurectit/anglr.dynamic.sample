@@ -7,13 +7,6 @@ import {GridTableComponentOptions} from '../gridTable.options';
  */
 export class GridTableModel implements GridTableComponentOptions
 {
-    //######################### public properties #########################
-
-    /**
-     * @inheritdoc
-     */
-    public content: string|undefined|null = '';
-    
     //######################### constructor #########################
     constructor(value: GridTableComponentOptions|undefined|null)
     {

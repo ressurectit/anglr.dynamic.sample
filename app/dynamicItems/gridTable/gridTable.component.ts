@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, SimpleChanges, ViewChild, AfterViewInit} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {LayoutComponent, LayoutComponentBase} from '@anglr/dynamic/layout';
 import {LayoutEditorMetadata} from '@anglr/dynamic/layout-editor';
 import {HostDisplayBlockStyle} from '@anglr/common';
@@ -22,6 +23,7 @@ import {GridTableLayoutMetadataLoader, GridTableRelationsMetadataLoader} from '.
     imports:
     [
         GridModule,
+        RouterModule,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

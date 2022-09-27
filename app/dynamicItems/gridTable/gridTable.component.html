@@ -5,8 +5,8 @@
         <basic-table-column id="email" name="email" title="E-mail"></basic-table-column>
 
         <basic-table-column id="detail" title="detail" [titleVisible]="false">
-            <ng-template #bodyTemplate>
-                <a>detail</a>
+            <ng-template #bodyTemplate let-row>
+                <a [routerLink]="['/dynamicContent/detail', row.id]">detail</a>
             </ng-template>
         </basic-table-column>
     </basic-table-metadata>
