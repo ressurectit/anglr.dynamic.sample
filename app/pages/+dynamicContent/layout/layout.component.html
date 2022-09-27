@@ -8,6 +8,13 @@
         <span class="fas fa-save"></span>
         <span>save</span>
     </button>
+
+    <button type="button" class="btn btn-primary" (click)="import()">
+        <span class="fas fa-file-import"></span>
+        <span>import</span>
+    </button>
+
+    <debug-data [copyClick]="metadata">copy metadata</debug-data>
 </div>
 
 <layout-editor class="flex-1" [metadata]="metadata"></layout-editor>
