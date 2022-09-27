@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {RelationsNode, RelationsNodeBase, RelationNodeInputSAComponent, RelationsNodeHeaderSAComponent} from '@anglr/dynamic/relations-editor';
+import {RelationsNode, RelationsNodeBase, RelationsNodeHeaderSAComponent, RelationNodeOutputSAComponent, RelationNodeInputSAComponent} from '@anglr/dynamic/relations-editor';
 
 /**
  * Relations node component for form block
@@ -12,6 +12,7 @@ import {RelationsNode, RelationsNodeBase, RelationNodeInputSAComponent, Relation
     imports:
     [
         RelationsNodeHeaderSAComponent,
+        RelationNodeOutputSAComponent,
         RelationNodeInputSAComponent,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush

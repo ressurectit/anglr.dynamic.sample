@@ -1,6 +1,6 @@
 const relations =
 [
-    'xxx',
+    'triggerData',
 ];
 
 export default relations;

@@ -1,11 +1,12 @@
-import {Component, ChangeDetectionStrategy, inject, Injector, ValueProvider} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject, Injector, ValueProvider, SimpleChanges} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {LayoutComponent, LayoutComponentBase, LayoutComponentMetadata, LayoutComponentRendererSADirective} from '@anglr/dynamic/layout';
 import {LayoutComponentsIteratorService, LayoutEditorMetadata, LayoutEditorMetadataExtractor} from '@anglr/dynamic/layout-editor';
 import {HostDisplayBlockStyle} from '@anglr/common';
-import {RelationsEditorMetadata} from '@anglr/dynamic/relations-editor';
+import {RelationsEditorMetadata, VoidObject} from '@anglr/dynamic/relations-editor';
 import {FormComponentControlBuilder, FORM_COMPONENT_CONTROL} from '@anglr/dynamic/form';
-import {generateId} from '@jscrpt/common';
+import {DynamicOutput} from '@anglr/dynamic/relations';
+import {generateId, nameof} from '@jscrpt/common';
 
 import {FormBlockComponentOptions} from './formBlock.options';
 import {FormBlockLayoutMetadataLoader, FormBlockRelationsMetadataLoader} from './formBlock.metadata';
@@ -33,7 +34,7 @@ import {FormBlockLayoutMetadataLoader, FormBlockRelationsMetadataLoader} from '.
 })
 @RelationsEditorMetadata(FormBlockRelationsMetadataLoader)
 @LayoutEditorMetadata(FormBlockLayoutMetadataLoader)
-export class FormBlockSAComponent extends LayoutComponentBase<FormBlockComponentOptions> implements LayoutComponent<FormBlockComponentOptions>
+export class FormBlockSAComponent<TValue = any> extends LayoutComponentBase<FormBlockComponentOptions> implements LayoutComponent<FormBlockComponentOptions>
 {
     //######################### protected properties #########################
 
@@ -52,6 +53,36 @@ export class FormBlockSAComponent extends LayoutComponentBase<FormBlockComponent
      */
     protected formGroup: FormGroup|undefined|null;
 
+    //######################### public properties - dynamic outputs #########################
+
+    /**
+     * Instance of current form value
+     */
+    @DynamicOutput()
+    public value: TValue|undefined|null;
+
+    /**
+     * Occurs when form is submitted
+     */
+    @DynamicOutput()
+    public submit: VoidObject = {};
+
+    //######################### protected methdos - template bindings #########################
+
+    /**
+     * Triggers submit event of form block
+     * @param event - Event that occured
+     */
+    protected submitForm(event: SubmitEvent): void
+    {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.submit = {};
+    }
+
+    //######################### protected methods - overrides #########################
+    
     /**
      * @inheritdoc
      */
@@ -61,29 +92,37 @@ export class FormBlockSAComponent extends LayoutComponentBase<FormBlockComponent
         {
             id: generateId(10),
             name: 'formBlock',
-            package: 'sample-package',
+            package: 'sample-components',
             options: this.options,
-        });        
+        });
+
+        this.formGroup.valueChanges.subscribe(value => this.value = value);
+        this.value = this.formGroup.value;
 
         this.formInjector = Injector.create(
-            {
-                parent: this.injector,
-                providers:
-                [
-                    <ValueProvider>
-                    {
-                        provide: FORM_COMPONENT_CONTROL,
-                        useValue: this.formGroup,
-                    }
-                ]
-            }
-        );
+        {
+            parent: this.injector,
+            providers:
+            [
+                <ValueProvider>
+                {
+                    provide: FORM_COMPONENT_CONTROL,
+                    useValue: this.formGroup,
+                }
+            ]
+        });
 
         this.changeDetector.detectChanges();
+    }
 
-        setTimeout(() =>
+    /**
+     * @inheritdoc
+     */
+    protected override onChanges(changes: SimpleChanges): void
+    {
+        if(nameof<FormBlockSAComponent>('value') in changes)
         {
-            console.log(this.formGroup, this.options?.content);
-        }, 2000);
+            this.formGroup?.patchValue(this.value ?? {}, {emitEvent: false});
+        }
     }
 }
