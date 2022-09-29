@@ -10,27 +10,32 @@ export class DynamicRouteModel implements DynamicRoute
     //######################### public properties #########################
 
     /**
-     * Path that is being used for route
+     * @inheritdoc
+     */
+    public module: string = '';
+
+    /**
+     * @inheritdoc
      */
     public path: string = '';
 
     /**
-     * Name of permission that is required for displaying page
+     * @inheritdoc
      */
     public permission: string|undefined|null = null;
 
     /**
-     * Indication whether use data resolver
+     * @inheritdoc
      */
     public withResolver: boolean = false;
 
     /**
-     * Name of relations that are used for obtaining data in relations
+     * @inheritdoc
      */
     public resolverRelations: string|undefined|null = null;
 
     /**
-     * Name of layout relations template that represents page contents
+     * @inheritdoc
      */
     public template: string = '';
 

@@ -3,6 +3,7 @@ import {Location} from '@angular/common';
 import {FormGroup} from '@angular/forms';
 import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
 import {FormModelBuilder, FormModelGroup} from '@anglr/common/forms';
+import {generateId} from '@jscrpt/common';
 
 import {DynamicRoute, DynamicRouteModel, DynamicRoutesService} from '../../../services/dynamicRoutes';
 
@@ -47,6 +48,11 @@ export class DynamicRouteDetailComponent
     protected async save(): Promise<void>
     {
         const value = this.form.value as Required<DynamicRoute>;
+
+        if(!value.template)
+        {
+            value.template = generateId(12);
+        }
 
         this._dynamicRoutes.addRoute(value);
         this._location.back();

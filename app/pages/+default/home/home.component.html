@@ -1,5 +1,5 @@
 Home
 
 <div class="flex-column">
-    <a [routerLink]="['/dynamicContent', route.path]" *ngFor="let route of routes">{{route.path}}</a>
+    <a [routerLink]="[route.module, route.path]" *ngFor="let route of routes">{{route.path}}</a>
 </div>

@@ -5,6 +5,7 @@ import {DynamicRoute} from '../services/dynamicRoutes';
 
 export const demoOverviewRoute: DynamicRoute = 
 {
+    module: '',
     path: 'overview',
     permission: null,
     withResolver: false,
@@ -14,6 +15,8 @@ export const demoOverviewRoute: DynamicRoute =
 
 export const demoDetailRoute: DynamicRoute =
 {
+
+    module: '',
     path: 'detail/:id',
     permission: null,
     withResolver: false,

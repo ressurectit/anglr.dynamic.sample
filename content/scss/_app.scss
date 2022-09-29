@@ -94,6 +94,15 @@
         overflow: visible;
     }
 
+    //############## GRID ##############
+    ng-grid
+    {
+        table
+        {
+            width: 100%;
+        }
+    }
+
     //############## BUTTONS ##############
 
     %btn-base

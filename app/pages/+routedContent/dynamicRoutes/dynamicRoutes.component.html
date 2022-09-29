@@ -1,6 +1,6 @@
 <div>Dynamic routes</div>
 
-<div class="flex-row flex-end">
+<div class="flex-row flex-end margin-bottom-small">
     <button class="btn btn-primary" type="button" routerLink="../new">
         <span class="fas fa-plus"></span>
         <span>add</span>
@@ -9,6 +9,17 @@
 
 <ng-grid #grid [gridOptions]="gridOptions">
     <basic-table-metadata>
-        <basic-table-column></basic-table-column>
+        <basic-table-column id="module" name="module" title="Module"></basic-table-column>
+        <basic-table-column id="path" name="path" title="Path"></basic-table-column>
+        <basic-table-column id="permission" name="permission" title="Permission"></basic-table-column>
+        <basic-table-column id="template" name="template" title="Template"></basic-table-column>
+
+        <basic-table-column id="remove" title="remove" [titleVisible]="false">
+            <ng-template #bodyTemplate let-row>
+                <a class="btn-icon" (click)="remove(row)">
+                    <span class="fas fa-trash"></span>
+                </a>
+            </ng-template>
+        </basic-table-column>
     </basic-table-metadata>
 </ng-grid>

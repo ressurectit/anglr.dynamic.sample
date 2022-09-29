@@ -1,35 +1,39 @@
-<div>Dynamic route detail</div>
+<div class="flex-row">
+    <div class="flex-1"></div>
 
-<form [formGroup]="form">
-    <div class="flex-row margin-top-big">
-        <div class="flex-1 margin-right-big">
-            <div class="form-group">
-                <label class="control-label">path</label>
-                <input class="form-control" formControlName="path">
+    <div class="flex-2">
+        <div>Dynamic route detail</div>
+
+        <form [formGroup]="form">
+            <div class="margin-top-medium">
+                <div class="form-group">
+                    <label class="control-label">module</label>
+                    <input class="form-control" formControlName="module">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">path</label>
+                    <input class="form-control" formControlName="path">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">permission</label>
+                    <input class="form-control" formControlName="permission">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">use resolver <input class="form-control" type="checkbox" formControlName="withResolver"></label>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label">permission</label>
-                <input class="form-control" formControlName="permission">
+            <div class="flex-row flex-end">
+                <button type="submit" class="btn btn-primary" (click)="save()">
+                    <span class="fas fa-save"></span>
+                    <span>save</span>
+                </button>
             </div>
-
-            <div class="form-group">
-                <label class="control-label">use resolver <input class="form-control" type="checkbox" formControlName="withResolver"></label>
-            </div>
-        </div>
-
-        <div class="flex-1 margin-left-big">
-            <div class="form-group">
-                <label class="control-label">template</label>
-                <input class="form-control" formControlName="template">
-            </div>
-        </div>
+        </form>
     </div>
 
-    <div class="flex-row flex-end">
-        <button type="submit" class="btn btn-primary" (click)="save()">
-            <span class="fas fa-save"></span>
-            <span>save</span>
-        </button>
-    </div>
-</form>
+    <div class="flex-1"></div>
+</div>

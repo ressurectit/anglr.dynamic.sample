@@ -1,6 +1,9 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, ViewChild} from '@angular/core';
 import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
-import {GridOptions} from '@anglr/grid';
+import {Grid, GridOptions, NoPagingComponent, SyncDataLoaderComponent, SyncDataLoaderOptions} from '@anglr/grid';
+import {setSyncData} from '@anglr/grid/extensions';
+
+import {DynamicRoute, DynamicRoutesService} from '../../../services/dynamicRoutes';
 
 /**
  * Component used for displaying all registered dynamic routes
@@ -23,12 +26,47 @@ export class DynamicRoutesComponent
      */
     protected gridOptions: GridOptions;
 
+    //######################### protected properties - children #########################
+
+    /**
+     * Instance of grid
+     */
+    @ViewChild('grid')
+    protected grid: Grid|undefined|null;
+
     //######################### constructor #########################
-    constructor()
+    constructor(private _dynamicRoutesSvc: DynamicRoutesService,)
     {
         this.gridOptions =
         {
-            autoInitialize: false,
+            autoInitialize: true,
+            plugins:
+            {
+                dataLoader:
+                {
+                    type: SyncDataLoaderComponent,
+                    options: <SyncDataLoaderOptions>
+                    {
+                        data: this._dynamicRoutesSvc.routes,
+                    }
+                },
+                paging:
+                {
+                    type: NoPagingComponent,
+                },
+            }
         };
+    }
+
+    //######################### protected methods - template bindings #########################
+
+    /**
+     * Removes dynamic route
+     * @param route - Route to be removed
+     */
+    protected async remove(route: DynamicRoute): Promise<void>
+    {
+        await this._dynamicRoutesSvc.remove(route);
+        this.grid?.execute(setSyncData(this._dynamicRoutesSvc.routes, true));
     }
 }

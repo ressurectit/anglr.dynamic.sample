@@ -15,7 +15,7 @@ const DYNAMIC_ROUTES = 'DYNAMIC_ROUTES';
 export class DynamicRoutesService
 {
     //######################### private fields #########################
-    
+
     /**
      * Current routes value
      */
@@ -30,7 +30,7 @@ export class DynamicRoutesService
     {
         return this._routes;
     }
-    
+
     //######################### constructor #########################
     constructor(@Inject(PERMANENT_STORAGE) private _permanentStorage: PermanentStorage,
                 private _router: Router,)
@@ -38,7 +38,7 @@ export class DynamicRoutesService
     }
 
     //######################### public methods #########################
-    
+
     /**
      * Initializes dynamic routes
      */
@@ -55,7 +55,7 @@ export class DynamicRoutesService
     public async addRoute(route: DynamicRoute): Promise<void>
     {
         this._routes.push(route);
-        
+
         await this.save();
     }
 
@@ -68,6 +68,28 @@ export class DynamicRoutesService
         this._setRoutes();
     }
 
+    /**
+     * Removes dynamic route
+     * @param route - Route to be removed
+     */
+    public async remove(route: DynamicRoute): Promise<void>
+    {
+        const index = this._routes.findIndex(itm => itm.module === route.module &&
+                                                    itm.path === route.path &&
+                                                    itm.permission === route.permission &&
+                                                    itm.resolverRelations === route.resolverRelations &&
+                                                    itm.template === route.template &&
+                                                    itm.withResolver === route.withResolver);
+
+        if(index < 0)
+        {
+            return;
+        }
+
+        this._routes.splice(index, 1);
+        await this.save();
+    }
+
     //######################### private methods #########################
 
     /**
@@ -75,25 +97,51 @@ export class DynamicRoutesService
      */
     private _setRoutes(): void
     {
-        const dynamicContentRoute = this._router.config.find(itm => itm.path == 'dynamicContent');
+        const currentConfig = this._router.config;
 
-        if(!dynamicContentRoute)
+        //prepare routes
+        for(const dynamicRoute of this._routes)
         {
-            return;
+            let dynamicModuleRoute = currentConfig.find(itm => itm.path == dynamicRoute.module && Array.isArray(itm.children));
+
+            if(!dynamicModuleRoute)
+            {
+                dynamicModuleRoute =
+                {
+                    path: dynamicRoute.module,
+                };
+
+                const fallbackRoute = currentConfig.findIndex(itm => itm.path == '**');
+
+                currentConfig.splice(fallbackRoute < 0 ? currentConfig.length : fallbackRoute, 0, dynamicModuleRoute);
+            }
+
+            dynamicModuleRoute.children = [];
         }
 
-        dynamicContentRoute.children = this._routes.map(itm =>
+        //fill routes
+        for(const dynamicRoute of this._routes)
         {
-            return {
-                path: itm.path,
+            const dynamicModuleRoute = currentConfig.find(itm => itm.path == dynamicRoute.module && Array.isArray(itm.children));
+
+            if(!dynamicModuleRoute)
+            {
+                //TODO: log missing
+
+                continue;
+            }
+
+            dynamicModuleRoute.children?.push(
+            {
+                path: dynamicRoute.path,
                 component: DynamicContentSAComponent,
                 data: <DynamicRouteData>
                 {
-                    template: itm.template
+                    template: dynamicRoute.template
                 },
-            };
-        });
+            });
+        }
 
-        this._router.resetConfig(this._router.config);
+        this._router.resetConfig(currentConfig);
     }
 }

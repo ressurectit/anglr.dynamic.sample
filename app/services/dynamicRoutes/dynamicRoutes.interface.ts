@@ -7,6 +7,11 @@ export interface DynamicRouteData
      * Name of layout relations template that represents page contents
      */
     template: string;
+
+    /**
+     * Name of relations that are used for obtaining data in relations
+     */
+    resolverRelations: string|undefined|null;
 }
 
 /**
@@ -14,6 +19,11 @@ export interface DynamicRouteData
  */
 export interface DynamicRoute
 {
+    /**
+     * Path to module containing route
+     */
+    module: string;
+
     /**
      * Path that is being used for route
      */
