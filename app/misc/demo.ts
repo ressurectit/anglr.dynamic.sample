@@ -578,43 +578,78 @@ export const demoHomeLayout: LayoutComponentMetadata =
     options: {
         children: [
             {
-                id: 'textBlock-gipytotkywljsxvd',
-                displayName: 'home',
-                package: 'basic-components',
-                name: 'textBlock',
+                id: 'styleBlock-clwgypiibtsvynxb',
+                displayName: 'styleBlock-clwgypiibtsvynxb',
+                package: 'css-components',
+                name: 'styleBlock',
                 options: {
-                    text: 'Home'
-                },
-                scope: null
-            },
-            {
-                id: 'routerLink-ftmvafttlpurslfn',
-                displayName: 'routerLink-ftmvafttlpurslfn',
-                package: 'sample-components',
-                name: 'routerLink',
-                options: {
-                    text: 'Prehľad',
-                    disabled: false,
-                    linkCssClass: null,
-                    link: '/overview',
-                    cssClass: null,
-                    margin: {
-                        top: '10px',
-                        right: null,
-                        bottom: null,
-                        left: null
-                    },
-                    padding: {
-                        top: null,
-                        right: null,
-                        bottom: null,
-                        left: null
-                    },
-                    textStyling: null
+                    style: '.title\r\n{\r\n    font-size: 1.3em;\r\n    font-weight: 500;\r\n    margin-bottom: 15px;\r\n    margin-left: 4px;\r\n}\r\n\r\n.tile-link\r\n{\r\n    padding: 10px 40px;\r\n    background-color: #6aba4f;\r\n    border-radius: 12px;\r\n    text-align: center;\r\n}\r\n\r\n.tile-link>a\r\n{\r\n    color: #fff;\r\n    text-decoration: none;\r\n    font-size: 1.2em;\r\n}',
+                    content: {
+                        id: 'stackPanel-neozgcxquiwtqkyy',
+                        displayName: 'stackPanel-neozgcxquiwtqkyy',
+                        package: 'basic-components',
+                        name: 'stackPanel',
+                        options: {
+                            children: [
+                                {
+                                    id: 'textBlock-gipytotkywljsxvd',
+                                    displayName: 'home',
+                                    package: 'basic-components',
+                                    name: 'textBlock',
+                                    options: {
+                                        text: 'Home ',
+                                        cssClass: 'title',
+                                        margin: {
+                                            top: null,
+                                            right: null,
+                                            bottom: null,
+                                            left: null
+                                        },
+                                        padding: {
+                                            top: null,
+                                            right: null,
+                                            bottom: null,
+                                            left: null
+                                        },
+                                        textStyling: null
+                                    },
+                                    scope: null
+                                },
+                                {
+                                    id: 'routerLink-ftmvafttlpurslfn',
+                                    displayName: 'routerLink-ftmvafttlpurslfn',
+                                    package: 'sample-components',
+                                    name: 'routerLink',
+                                    options: {
+                                        text: 'Dynamic overview',
+                                        disabled: false,
+                                        linkCssClass: null,
+                                        link: '/overview',
+                                        cssClass: 'tile-link',
+                                        margin: {
+                                            top: '10px',
+                                            right: null,
+                                            bottom: null,
+                                            left: null
+                                        },
+                                        padding: {
+                                            top: null,
+                                            right: null,
+                                            bottom: null,
+                                            left: null
+                                        },
+                                        textStyling: null
+                                    },
+                                    scope: null
+                                }
+                            ]
+                        },
+                        scope: null
+                    }
                 },
                 scope: null
             }
         ]
     },
-    scope: undefined,
+    scope: undefined
 };
