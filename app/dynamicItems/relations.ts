@@ -1,5 +1,6 @@
 const relations =
 [
+    'activatedRoute',
     'triggerData',
 ];
 
