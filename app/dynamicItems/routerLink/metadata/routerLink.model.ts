@@ -21,18 +21,18 @@ export class RouterLinkModel implements RouterLinkComponentOptions
     /**
      * @inheritdoc
      */
-    @LayoutPropertyName('Disabled')
-    @LayoutPropertyDescription('Indication whether is link disabled')
-    @LayoutPropertyType<DefaultKnownPropertyTypes>('inputBoolean')
-    public disabled: boolean|undefined|null = false;
-
-    /**
-     * @inheritdoc
-     */
     @LayoutPropertyName('Link css class')
     @LayoutPropertyDescription('Css class applied to link (anchor) element itself')
     @LayoutPropertyType<DefaultKnownPropertyTypes>('inputString')
     public linkCssClass: string|undefined|null = null;
+
+    /**
+     * @inheritdoc
+     */
+    @LayoutPropertyName('Router link')
+    @LayoutPropertyDescription('Link address to be routed to')
+    @LayoutPropertyType<DefaultKnownPropertyTypes>('inputString')
+    public link: string|undefined|null = null;
     
     //######################### constructor #########################
     constructor(value: RouterLinkComponentOptions|undefined|null)

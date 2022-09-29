@@ -11,14 +11,14 @@ export interface RouterLinkComponentOptions
     text: string|undefined|null;
 
     /**
-     * Indication whether is link disabled
-     */
-    disabled: boolean|undefined|null;
-
-    /**
      * Css class applied to link (anchor) element itself
      */
     linkCssClass: string|undefined|null;
+
+    /**
+     * Link address to be routed to
+     */
+    link: string|undefined|null;
 }
 
 /**

@@ -33,7 +33,7 @@ export class RouterLinkLayoutEditorMetadata implements LayoutEditorMetadataDescr
                     modelType: RouterLinkModel,
                     propertiesControls: 
                     [
-                        genericPropertiesControlFor<RouterLinkModel>(['linkCssClass', 'text', 'disabled']),
+                        genericPropertiesControlFor<RouterLinkModel>(['link', 'linkCssClass', 'text']),
                     ],
                 },
             ],
@@ -41,7 +41,6 @@ export class RouterLinkLayoutEditorMetadata implements LayoutEditorMetadataDescr
         defaultOptions:
         {
             text: 'Link',
-            disabled: false,
         }
     };
 

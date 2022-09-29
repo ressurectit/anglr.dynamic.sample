@@ -15,13 +15,22 @@ export const demoOverviewRoute: DynamicRoute =
 
 export const demoDetailRoute: DynamicRoute =
 {
-
     module: '',
     path: 'detail/:id',
     permission: 'authenticated',
     withResolver: false,
     resolverRelations: null,
     template: 'detail'
+};
+
+export const demoHomeRoute: DynamicRoute =
+{
+    module: '',
+    path: '',
+    permission: 'authenticated',
+    withResolver: false,
+    resolverRelations: null,
+    template: 'home'
 };
 
 export const demoOverviewLayout: LayoutComponentMetadata =
@@ -558,4 +567,54 @@ export const demoDetailLayout: LayoutComponentMetadata =
         textStyling: null
     },
     scope: undefined
+};
+
+export const demoHomeLayout: LayoutComponentMetadata =
+{
+    id: 'stackPanel-fbfrmtqpgk',
+    displayName: 'root',
+    package: 'basic-components',
+    name: 'stackPanel',
+    options: {
+        children: [
+            {
+                id: 'textBlock-gipytotkywljsxvd',
+                displayName: 'home',
+                package: 'basic-components',
+                name: 'textBlock',
+                options: {
+                    text: 'Home'
+                },
+                scope: null
+            },
+            {
+                id: 'routerLink-ftmvafttlpurslfn',
+                displayName: 'routerLink-ftmvafttlpurslfn',
+                package: 'sample-components',
+                name: 'routerLink',
+                options: {
+                    text: 'Prehľad',
+                    disabled: false,
+                    linkCssClass: null,
+                    link: '/overview',
+                    cssClass: null,
+                    margin: {
+                        top: '10px',
+                        right: null,
+                        bottom: null,
+                        left: null
+                    },
+                    padding: {
+                        top: null,
+                        right: null,
+                        bottom: null,
+                        left: null
+                    },
+                    textStyling: null
+                },
+                scope: null
+            }
+        ]
+    },
+    scope: undefined,
 };

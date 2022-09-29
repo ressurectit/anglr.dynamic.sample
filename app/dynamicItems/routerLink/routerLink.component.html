@@ -1,4 +1,1 @@
-link
-<!-- <button type="submit" [disabled]="disabled" [ngClass]="options?.buttonCssClass ?? ''" (click)="click = {}">
-    <span>{{options?.text}}</span>
-</button> -->
+<a [routerLink]="argument ? [options?.link, argument] : [options?.link]" [ngClass]="options?.linkCssClass">{{options?.text}}</a>

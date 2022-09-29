@@ -7,7 +7,7 @@ import {UserSettingsSAComponent} from '../../../../components';
 import {createStoreDataServiceFactory} from '../../../../misc/factories';
 import {StoreDataService} from '../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
-import {demoDetailLayout, demoDetailRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
+import {demoDetailLayout, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
 import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
 
 /**
@@ -83,6 +83,19 @@ export class MainMenuComponent
             this._store.setData('detail', detail);
         }
 
+        let home = this._store.getData('home');
+
+        if(!home)
+        {
+            home =
+            {
+                layout: demoHomeLayout,
+                relations: [],
+            };
+            
+            this._store.setData('home', home);
+        }
+
         const routes = this._dynamicRoutes.routes ?? [];
         const overviewRoute = routes.find(itm => itm.template == 'overview');
 
@@ -96,6 +109,13 @@ export class MainMenuComponent
         if(!detialRoute)
         {
             await this._dynamicRoutes.addRoute(demoDetailRoute);
+        }
+
+        const homeRoute = routes.find(itm => itm.template == 'home');
+
+        if(!homeRoute)
+        {
+            await this._dynamicRoutes.addRoute(demoHomeRoute);
         }
 
         window.location.reload();
