@@ -37,7 +37,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                     opacity: 0
                 })
             ], {optional: true}),
-            query(':leave', animateChild()),
+            query(':leave', animateChild(), {optional: true}),
             group(
             [
                 query(':leave',

@@ -1,9 +1,11 @@
-<a class="btn btn-primary" [routerLink]="['/admin/layout', template]" *authorize="'layoutEditor-page'">
-    <span>edit layout</span>
-</a>
-
-<a class="btn btn-primary" [routerLink]="['/admin/relations', template]" *authorize="'relationsEditor-page'">
-    <span>edit relations</span>
-</a>
+<div class="flex-row flex-end margin-vertical-extra-small" *authorize="'layoutEditor-page || relationsEditor-page' conditionString: true">
+    <a class="btn btn-primary margin-right-extra-small" [routerLink]="['/admin/layout', template]" *authorize="'layoutEditor-page'">
+        <span>edit layout</span>
+    </a>
+    
+    <a class="btn btn-primary" [routerLink]="['/admin/relations', template]" *authorize="'relationsEditor-page'">
+        <span>edit relations</span>
+    </a>
+</div>
 
 <ng-container [layoutComponentRenderer]="metadata"></ng-container>

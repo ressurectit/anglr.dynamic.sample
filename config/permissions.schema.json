@@ -13,6 +13,7 @@
                 "enum":
                 [
                     "ADMIN",
+                    "SUPERADMIN",
                     "USER"
                 ]
             }
@@ -45,6 +46,11 @@
         {
             "$ref": "#/definitions/roles",
             "description": "Displaying admin page of relations editor for dynamic content"
+        },
+        "metadata-editation":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying button for manual change of metadata, can damage metadata!"
         },
         "logging-settings":
         {

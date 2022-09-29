@@ -79,6 +79,20 @@ export class AccountService
                     additionalInfo: null,
                 };
             }
+            else if(accessToken.userName == 'superadmin' && accessToken.password == 'superadmin')
+            {
+                const privileges = this._roles2privileges(['SUPERADMIN']);
+
+                this._identity =
+                {
+                    isAuthenticated: true,
+                    userName: 'superadmin',
+                    firstName: 'superadmin',
+                    surname: '',
+                    permissions: privileges.concat(['authenticated']),
+                    additionalInfo: null,
+                };
+            }
             else
             {
                 this._identity = null;

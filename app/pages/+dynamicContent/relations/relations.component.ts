@@ -1,18 +1,14 @@
-import {Component, ChangeDetectionStrategy, OnInit, Inject, FactoryProvider, ClassProvider, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit, Inject, FactoryProvider, ClassProvider} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
-import {CodeEditorContent, CodeEditorDialogComponent, CodeEditorDialogData, EditorHotkeys, JsonLanguageModel, MetadataStateManager, MetadataStorage, METADATA_STATE_MANAGER, PackageManager} from '@anglr/dynamic';
+import {EditorHotkeys, MetadataHistoryManager, MetadataStateManager, MetadataStorage, METADATA_STATE_MANAGER, PackageManager} from '@anglr/dynamic';
 import {RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relations';
-import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
+import {RelationsNodeMetadata, RELATIONS_HISTORY_MANAGER} from '@anglr/dynamic/relations-editor';
 import {provideHandlebarsLayoutRelationsEditor} from '@anglr/dynamic/handlebars-components';
 import {provideRestLayoutRelationsEditor} from '@anglr/dynamic/rest-components';
 import {provideTinyMceLayoutRelationsEditor} from '@anglr/dynamic/tinymce-components';
 import {provideCssLayoutRelationsEditor} from '@anglr/dynamic/css-components';
-import {TitledDialogService} from '@anglr/common/material';
-import {GlobalNotificationsService} from '@anglr/notifications';
 import {LayoutManager, provideEditorRelationsCustomComponents, provideLayoutRelationsEditorWithStatic} from '@anglr/dynamic/layout-relations';
-import {isPresent} from '@jscrpt/common';
-import {lastValueFrom} from 'rxjs';
 
 import {StoreDataService} from '../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../misc/interfaces';
@@ -77,9 +73,7 @@ export class RelationsComponent implements OnInit
                 private _store: StoreDataService<LayoutRelationsMetadata>,
                 @Inject(METADATA_STATE_MANAGER) private _metaManager: MetadataStateManager<RelationsNodeMetadata[]>,
                 private layoutManager: LayoutManager,
-                private dialog: TitledDialogService,
-                private _notifications: GlobalNotificationsService,
-                private _changeDetector: ChangeDetectorRef,)
+                @Inject(RELATIONS_HISTORY_MANAGER) protected history: MetadataHistoryManager,)
     {
     }
 
@@ -115,38 +109,5 @@ export class RelationsComponent implements OnInit
         metadata.relations = this._metaManager.getMetadata() ?? undefined;
         
         this._store.setData(this._id, metadata);
-    }
-
-    /**
-     * Imports metadata from json string
-     */
-    protected async import(): Promise<void>
-    {
-        const result = await lastValueFrom(this.dialog.open<CodeEditorDialogComponent, CodeEditorDialogData, CodeEditorContent|null>(CodeEditorDialogComponent,
-        {
-            title: 'Import relations metadata',
-            width: '75vw',
-            height: '75vh',
-            data: 
-            {
-                content: '',
-                languageModel: JsonLanguageModel,
-
-            }
-        }).afterClosed());
-
-        if(isPresent(result))
-        {
-            try
-            {
-                this.metadata = JSON.parse(result.content);
-
-                this._changeDetector.detectChanges();
-            }
-            catch(e)
-            {
-                this._notifications.error(`Failed to parse json ${e}`);
-            }
-        }
     }
 }

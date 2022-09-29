@@ -1,10 +1,9 @@
 import {NgModule} from '@angular/core';
-import {GoBackModule} from '@anglr/common';
 import {ModuleRoutes} from '@anglr/common/router';
-import {DebugDataCopyClickModule} from '@anglr/common/material';
 import {DynamicLayoutRelationsEditorModule} from '@anglr/dynamic/layout-relations';
 
 import {components} from './dynamicContent.routes';
+import {EditorControlsSAComponent} from '../../components';
 
 /**
  * Module for dynamic content application pages
@@ -13,9 +12,8 @@ import {components} from './dynamicContent.routes';
 {
     imports:
     [
-        GoBackModule,
         DynamicLayoutRelationsEditorModule,
-        DebugDataCopyClickModule,
+        EditorControlsSAComponent,
     ],
     declarations:
     [

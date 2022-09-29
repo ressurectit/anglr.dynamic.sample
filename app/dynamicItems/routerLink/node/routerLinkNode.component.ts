@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {RelationsNode, RelationsNodeBase, RelationNodeInputSAComponent, RelationNodeOutputSAComponent, RelationsNodeHeaderSAComponent} from '@anglr/dynamic/relations-editor';
+import {RelationsNode, RelationsNodeBase, RelationNodeInputSAComponent, RelationsNodeHeaderSAComponent} from '@anglr/dynamic/relations-editor';
 
 import {RouterLinkRelationsOptions} from '../routerLink.options';
 
@@ -15,7 +15,6 @@ import {RouterLinkRelationsOptions} from '../routerLink.options';
     [
         RelationsNodeHeaderSAComponent,
         RelationNodeInputSAComponent,
-        RelationNodeOutputSAComponent,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
