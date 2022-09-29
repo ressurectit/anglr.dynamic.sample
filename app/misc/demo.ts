@@ -653,3 +653,50 @@ export const demoHomeLayout: LayoutComponentMetadata =
     },
     scope: undefined
 };
+
+export const demoDetailResolverRelations: RelationsNodeMetadata[] =
+[
+    {
+        id: 'dynamic-data-resolver',
+        name: 'dynamic-data-resolver',
+        package: 'static-components',
+        displayName: 'dynamic-data-resolver',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: false,
+            coordinates: {
+                x: 798,
+                y: 371
+            },
+            options: null
+        },
+        outputs: []
+    },
+    {
+        id: 'value-ietgxdskwtqignbi',
+        name: 'value',
+        package: 'basic-components',
+        relationsOptions: {
+            value: 10
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 294,
+                y: 265
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'value',
+                inputs: [
+                    {
+                        id: 'dynamic-data-resolver',
+                        inputName: 'data'
+                    }
+                ]
+            }
+        ]
+    }
+];

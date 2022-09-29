@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 
 import {createStoreDataServiceFactory} from '../../factories';
 import {provideSampleRelations} from '../../../dynamicItems/utils';
+import ActivatedRouteSnapshotRelations from '../../../dynamicItems/activatedRouteSnapshot/type';
 import DynamicDataResolverRelations from '../../../dynamicItems/dynamicDataResolver/type';
 import {StoreDataService} from '../../../services/storeData';
 import {DynamicRouteData} from '../../../services/dynamicRoutes';
@@ -16,30 +17,20 @@ import {DynamicRouteData} from '../../../services/dynamicRoutes';
 /**
  * Resolve definition data type
  */
-export interface DynamicDataResolve
+export interface DynamicDataResolve<TData = any>
 {
     /**
      * Data obtained by resolver
      */
-    data?: DynamicDataRouteData;
-}
-
-/**
- * Data obtained by resolver
- */
-export interface DynamicDataRouteData<TData = any>
-{
-    /**
-     * Data to be returned
-     */
     data?: TData;
 }
+
 
 /**
  * Dynamic data data resolver that uses relations
  */
 @Injectable()
-export class DynamicDataDataResolver<TData = any> implements Resolve<DynamicDataRouteData<TData>>
+export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
 {
     //######################### private fields #########################
 
@@ -47,6 +38,31 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<DynamicData
      * Instance of injector
      */
     private _injector: Injector;
+
+    /**
+     * Instance of relations processor for resolver relations
+     */
+    private _processor: RelationsProcessor;
+
+    /**
+     * Instance of relations component manager for resolver relations
+     */
+    private _manager: RelationsComponentManager;
+
+    /**
+     * Instance of relations manager for resolver relations
+     */
+    private _relations: RelationsManager;
+
+    /**
+     * Instance of store for resolver relations 
+     */
+    private _store: StoreDataService<RelationsNodeMetadata[]>;
+
+    /**
+     * Indication whether are relations initialized
+     */
+    private _relationsInitialized: boolean = false;
 
     //######################### constructor #########################
     constructor(injector: Injector,)
@@ -64,6 +80,11 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<DynamicData
             ],
             parent: injector,
         });
+
+        this._processor = this._injector.get(RelationsProcessor);
+        this._manager = this._injector.get(RelationsComponentManager);
+        this._relations = this._injector.get(RelationsManager);
+        this._store = this._injector.get(StoreDataService<RelationsNodeMetadata[]>);
     }
 
     //######################### implementation of Resolve<PrehladHospCookieData> #########################
@@ -73,31 +94,36 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<DynamicData
      * @param route - Next route that will be resolved
      * @param _ - Current state of router
      */
-    public resolve(route: ActivatedRouteSnapshot, _: RouterStateSnapshot): Observable<DynamicDataRouteData>
+    public resolve(route: ActivatedRouteSnapshot, _: RouterStateSnapshot): Observable<TData>
     {
-        const processor = this._injector.get(RelationsProcessor);
-        const manager = this._injector.get(RelationsComponentManager);
-        const relations = this._injector.get(RelationsManager);
-        const store = this._injector.get(StoreDataService<RelationsNodeMetadata[]>);
         const dataResolverRelations = new DynamicDataResolverRelations();
+        const routeSnapshot = new ActivatedRouteSnapshotRelations(route);
         const data = route.data as DynamicRouteData;
 
-        if(data.resolverRelations)
+        if(data.resolverRelations && !this._relationsInitialized)
         {
-            relations.setRelations(store.getData(data.resolverRelations) ?? []);
+            this._relations.setRelations(this._store.getData(data.resolverRelations) ?? []);
+            this._relationsInitialized = true;
         }
 
         return new Observable(subscriber =>
         {
             (async () =>
             {
-                manager.registerComponent(DynamicDataResolverRelations.relationsId, dataResolverRelations);
-                await processor.initialized;
-                processor.updateRelations(DynamicDataResolverRelations.relationsId);
+                this._manager.registerComponent(ActivatedRouteSnapshotRelations.relationsId, routeSnapshot);
+                this._manager.registerComponent(DynamicDataResolverRelations.relationsId, dataResolverRelations);
+                await this._processor.initialized;
+                this._processor.updateRelations(ActivatedRouteSnapshotRelations.relationsId);
+                this._processor.updateRelations(DynamicDataResolverRelations.relationsId);
 
                 const result = await dataResolverRelations.result;
+
+                this._processor.destroyComponent(DynamicDataResolverRelations.relationsId);
+                this._processor.destroyComponent(ActivatedRouteSnapshotRelations.relationsId);
+                this._manager.unregisterComponent(DynamicDataResolverRelations.relationsId);
+                this._manager.unregisterComponent(ActivatedRouteSnapshotRelations.relationsId);
                 
-                subscriber.next({data: result});
+                subscriber.next(result);
                 subscriber.complete();
             })();
         });

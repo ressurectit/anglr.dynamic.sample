@@ -1,5 +1,6 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Injector} from '@angular/core';
 import {Router} from '@angular/router';
+import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
 import {AuthenticationService} from '@anglr/authentication';
 import {TitledDialogService} from '@anglr/common/material';
 
@@ -7,7 +8,7 @@ import {UserSettingsSAComponent} from '../../../../components';
 import {createStoreDataServiceFactory} from '../../../../misc/factories';
 import {StoreDataService} from '../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
-import {demoDetailLayout, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
+import {demoDetailLayout, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
 import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
 
 /**
@@ -30,7 +31,8 @@ export class MainMenuComponent
                 private _router: Router,
                 private _dialog: TitledDialogService,
                 private _store: StoreDataService<LayoutRelationsMetadata>,
-                private _dynamicRoutes: DynamicRoutesService,)
+                private _dynamicRoutes: DynamicRoutesService,
+                private _injector: Injector,)
     {
     }
 
@@ -116,6 +118,22 @@ export class MainMenuComponent
         if(!homeRoute)
         {
             await this._dynamicRoutes.addRoute(demoHomeRoute);
+        }
+
+        const resolverRelationsInjector = Injector.create(
+        {
+            providers:
+            [
+                createStoreDataServiceFactory('RESOLVER_RELATIONS_DATA'),
+            ],
+            parent: this._injector,
+        });
+
+        const resolverRelationsStore = resolverRelationsInjector.get(StoreDataService<RelationsNodeMetadata[]>);
+
+        if(!resolverRelationsStore.getData('detailResolver'))
+        {
+            resolverRelationsStore.setData('detailResolver', demoDetailResolverRelations);
         }
 
         window.location.reload();

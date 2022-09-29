@@ -3,6 +3,7 @@ import {StaticComponentsRegister as Register} from '@anglr/dynamic/relations-edi
 import {Dictionary} from '@jscrpt/common';
 
 import DynamicDataResolverRelations from '../../../../../dynamicItems/dynamicDataResolver/type';
+import ActivatedRouteSnapshotRelations from '../../../../../dynamicItems/activatedRouteSnapshot/type';
 
 /**
  * Static components register for resolver relations
@@ -20,6 +21,7 @@ export class ResolverStaticRegister extends Register
         const result: Dictionary<Type<any>> = {};
 
         result[DynamicDataResolverRelations.relationsId] = DynamicDataResolverRelations;
+        result[ActivatedRouteSnapshotRelations.relationsId] = ActivatedRouteSnapshotRelations;
 
         return result;
     }
