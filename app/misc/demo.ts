@@ -7,7 +7,7 @@ export const demoOverviewRoute: DynamicRoute =
 {
     module: '',
     path: 'overview',
-    permission: null,
+    permission: 'authenticated',
     withResolver: false,
     resolverRelations: null,
     template: 'overview'
@@ -18,7 +18,7 @@ export const demoDetailRoute: DynamicRoute =
 
     module: '',
     path: 'detail/:id',
-    permission: null,
+    permission: 'authenticated',
     withResolver: false,
     resolverRelations: null,
     template: 'detail'

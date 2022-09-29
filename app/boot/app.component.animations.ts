@@ -28,7 +28,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                     width: '100%',
                     height: '100%'
                 })
-            ]),
+            ], {optional: true}),
             query(':enter',
             [
                 style(
@@ -36,7 +36,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                     transform: 'rotateY(-90deg)',
                     opacity: 0
                 })
-            ]),
+            ], {optional: true}),
             query(':leave', animateChild()),
             group(
             [
@@ -47,7 +47,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                         transform: 'rotateY(90deg)',
                         opacity: 0
                     }))
-                ]),
+                ], {optional: true}),
                 query(':enter',
                 [
                     animate('350ms 350ms ease-out', style(
@@ -55,10 +55,10 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                         transform: 'rotateY(0)',
                         opacity: 1
                     }))
-                ])
+                ], {optional: true})
             ]),
-            query(':enter', animateChild())
-        ])
+            query(':enter', animateChild(), {optional: true})
+        ], {optional: true})
     ]),
     transition('login => *',
     [
@@ -79,7 +79,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                     width: '100%',
                     height: '100%'
                 })
-            ]),
+            ], {optional: true}),
             query(':enter',
             [
                 style(
@@ -87,8 +87,8 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                     transform: 'rotateY(-90deg)',
                     opacity: 0
                 })
-            ]),
-            query(':leave', animateChild()),
+            ], {optional: true}),
+            query(':leave', animateChild(), {optional: true}),
             group(
             [
                 query(':leave',
@@ -98,7 +98,7 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                         transform: 'rotateY(90deg)',
                         opacity: 0
                     }))
-                ]),
+                ], {optional: true}),
                 query(':enter',
                 [
                     animate('350ms 350ms ease-out', style(
@@ -106,10 +106,10 @@ export const routeAnimationTrigger = trigger('routeAnimations',
                         transform: 'rotateY(0)',
                         opacity: 1
                     }))
-                ])
+                ], {optional: true})
             ]),
-            query(':enter', animateChild())
-        ])
+            query(':enter', animateChild(), {optional: true})
+        ], {optional: true})
     ]),
     transition('* => *',
     [

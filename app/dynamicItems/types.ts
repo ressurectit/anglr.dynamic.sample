@@ -2,6 +2,7 @@ const components =
 [
     'formBlock',
     'gridTable',
+    'routerLink',
     'submitButton',
 ];
 

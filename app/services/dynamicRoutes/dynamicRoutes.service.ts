@@ -5,6 +5,7 @@ import {PromiseOr} from '@jscrpt/common';
 
 import {DynamicRoute, DynamicRouteData} from './dynamicRoutes.interface';
 import {DynamicContentSAComponent} from '../../components';
+import {DynamicAuthGuard} from '../../misc/guards';
 
 const DYNAMIC_ROUTES = 'DYNAMIC_ROUTES';
 
@@ -111,9 +112,7 @@ export class DynamicRoutesService
                     path: dynamicRoute.module,
                 };
 
-                const fallbackRoute = currentConfig.findIndex(itm => itm.path == '**');
-
-                currentConfig.splice(fallbackRoute < 0 ? currentConfig.length : fallbackRoute, 0, dynamicModuleRoute);
+                currentConfig.unshift(dynamicModuleRoute);
             }
 
             dynamicModuleRoute.children = [];
@@ -137,8 +136,11 @@ export class DynamicRoutesService
                 component: DynamicContentSAComponent,
                 data: <DynamicRouteData>
                 {
-                    template: dynamicRoute.template
+                    template: dynamicRoute.template,
+                    permission: dynamicRoute.permission,
+                    resolverRelations: dynamicRoute.resolverRelations,
                 },
+                canActivate: [...(!dynamicRoute.permission) ? [] : [DynamicAuthGuard]]
             });
         }
 

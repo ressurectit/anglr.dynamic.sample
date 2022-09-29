@@ -31,12 +31,6 @@ export const routesOptions: ModuleRoutesOptions =
             path: 'admin',
             loadChildren: () => import('../pages/+dynamicContent/dynamicContent.module').then(({DynamicContentModule}) => DynamicContentModule)
         },
-        {
-            path: 'dynamicContent',
-            children: 
-            [
-            ]
-        },
     ],
     staticRoutesAfter:
     [

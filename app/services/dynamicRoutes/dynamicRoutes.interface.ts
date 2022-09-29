@@ -12,6 +12,11 @@ export interface DynamicRouteData
      * Name of relations that are used for obtaining data in relations
      */
     resolverRelations: string|undefined|null;
+
+    /**
+     * Name of permission that is required for displaying page
+     */
+    permission: string|undefined|null;
 }
 
 /**
