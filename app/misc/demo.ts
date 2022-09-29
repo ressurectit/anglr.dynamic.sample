@@ -18,8 +18,8 @@ export const demoDetailRoute: DynamicRoute =
     module: '',
     path: 'detail/:id',
     permission: 'authenticated',
-    withResolver: false,
-    resolverRelations: null,
+    withResolver: true,
+    resolverRelations: 'detailResolver',
     template: 'detail'
 };
 

@@ -6,6 +6,7 @@ import {PromiseOr} from '@jscrpt/common';
 import {DynamicRoute, DynamicRouteData} from './dynamicRoutes.interface';
 import {DynamicContentSAComponent} from '../../components';
 import {DynamicAuthGuard} from '../../misc/guards';
+import {DynamicDataDataResolver} from '../../misc/resolvers';
 
 const DYNAMIC_ROUTES = 'DYNAMIC_ROUTES';
 
@@ -140,7 +141,18 @@ export class DynamicRoutesService
                     permission: dynamicRoute.permission,
                     resolverRelations: dynamicRoute.resolverRelations,
                 },
-                canActivate: [...(!dynamicRoute.permission) ? [] : [DynamicAuthGuard]]
+                canActivate:
+                [
+                    ...(!dynamicRoute.permission) ? [] : [DynamicAuthGuard]
+                ],
+                providers: 
+                [
+                    ...dynamicRoute.withResolver ? [DynamicDataDataResolver] : [],
+                ],
+                resolve:
+                {
+                    ...dynamicRoute.withResolver ? {data: DynamicDataDataResolver} : {}
+                }
             });
         }
 

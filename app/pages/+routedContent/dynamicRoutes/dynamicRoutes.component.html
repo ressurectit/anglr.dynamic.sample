@@ -19,6 +19,10 @@
                 <a class="btn-icon" (click)="remove(row)">
                     <span class="fas fa-trash"></span>
                 </a>
+
+                <a class="btn-icon margin-left-small" *ngIf="row.withResolver" [routerLink]="['../resolverRelations', row.resolverRelations]">
+                    <span class="fas fa-pen"></span>
+                </a>
             </ng-template>
         </basic-table-column>
     </basic-table-metadata>

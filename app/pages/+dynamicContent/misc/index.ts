@@ -1,1 +1,1 @@
-export * from './services/complexStaticRegister/complexStaticRegister.service';
+export * from './services/resolverStaticRegister/resolverStaticRegister.service';

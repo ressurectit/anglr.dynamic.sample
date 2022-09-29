@@ -16,7 +16,7 @@ import {DemoCustomComponentsRegister} from '../../../services/demoCustomComponen
 import {DemoRelationsPackageManager} from '../../../services/demoRelationsPackageManager/demoRelationsPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
-import {ComplexStaticRegister} from '../misc';
+import {ResolverStaticRegister} from '../misc';
 
 /**
  * Component used for displaying relations editor
@@ -40,7 +40,7 @@ import {ComplexStaticRegister} from '../misc';
         provideTinyMceLayoutRelationsEditor(),
         provideCssLayoutRelationsEditor(),
         provideSampleLayoutRelationsEditor(),
-        provideEditorRelationsCustomComponents(provideLayoutRelationsEditorWithStatic(ComplexStaticRegister), DemoCustomComponentsRegister),
+        provideEditorRelationsCustomComponents(provideLayoutRelationsEditorWithStatic(ResolverStaticRegister), DemoCustomComponentsRegister),
         <ClassProvider>
         {
             provide: PackageManager,
