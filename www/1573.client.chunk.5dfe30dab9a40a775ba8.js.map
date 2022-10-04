@@ -1,1 +1,0 @@
-{"version":3,"file":"1573.client.chunk.5dfe30dab9a40a775ba8.js","mappings":"qJAAA,MAKA,EAJA,CACI,c","sources":["webpack://ng-universal-demo/./app/dynamicItems/relations.ts"],"sourcesContent":["const relations =\n[\n    'triggerData',\n];\n\nexport default relations;\n"],"names":[],"sourceRoot":""}
