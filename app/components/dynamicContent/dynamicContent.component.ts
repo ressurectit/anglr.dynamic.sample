@@ -9,6 +9,8 @@ import {LayoutComponentMetadata, LAYOUT_METADATA_STORAGE, LayoutComponentRendere
 import {RelationsManager, RELATIONS_METADATA_STORAGE} from '@anglr/dynamic/relations';
 import {MetadataStorage} from '@anglr/dynamic';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
+import {provideBasicLayoutRelations} from '@anglr/dynamic/basic-components';
+import {provideMaterialLayoutRelations} from '@anglr/dynamic/material-components';
 import {AuthorizationModule} from '@anglr/authentication';
 import {provideFormLayoutRelations} from '@anglr/dynamic/form';
 import {nameof} from '@jscrpt/common';
@@ -49,6 +51,8 @@ import {provideSampleLayoutRelations} from '../../dynamicItems/utils';
             deps: [StoreDataService]
         },
         provideLayoutRelationsCustomComponents(),
+        provideBasicLayoutRelations(),
+        provideMaterialLayoutRelations(),
         provideCssLayoutRelations(),
         provideTinyMceLayoutRelations(),
         provideHandlebarsLayoutRelations(),

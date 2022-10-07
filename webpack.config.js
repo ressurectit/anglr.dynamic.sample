@@ -197,26 +197,6 @@ export default [function(options, args)
                     }
                 ] : [],
                 {
-                    test: /\.js$/,
-                    use:
-                    [
-                        {
-                            loader: 'dynamic-import-loader',
-                            options:
-                            {
-                                moduleName: '@anglr/dynamic',
-                                replace: /@anglr\/dynamic\/(?<submodule>.*?)\//g,
-                                distPath: 'es2020',
-                                replacer: (relativePath, groups) => `${relativePath}/${groups.submodule}/src/`
-                            }
-                        }
-                    ],
-                    include:
-                    [
-                        path.join(dirName, 'node_modules/@anglr/dynamic')
-                    ]
-                },
-                {
                     test: numeralResolve,
                     use:
                     [
@@ -331,6 +311,7 @@ export default [function(options, args)
                 ...prod ? {ngDevMode: false} : {},
                 ngI18nClosureMode: false,
                 ngDesignerMetadata: true,
+                ngDynamicMonacoPath: prod ? JSON.stringify('www/dist') : JSON.stringify('dist'),
             }),
             new MiniCssExtractPlugin(
             {

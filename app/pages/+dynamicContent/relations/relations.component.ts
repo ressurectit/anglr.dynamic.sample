@@ -8,6 +8,8 @@ import {provideHandlebarsLayoutRelationsEditor} from '@anglr/dynamic/handlebars-
 import {provideRestLayoutRelationsEditor} from '@anglr/dynamic/rest-components';
 import {provideTinyMceLayoutRelationsEditor} from '@anglr/dynamic/tinymce-components';
 import {provideCssLayoutRelationsEditor} from '@anglr/dynamic/css-components';
+import {provideBasicLayoutRelationsEditor} from '@anglr/dynamic/basic-components';
+import {provideMaterialLayoutRelationsEditor} from '@anglr/dynamic/material-components';
 import {LayoutManager, provideEditorRelationsCustomComponents, provideLayoutRelationsEditorWithStatic} from '@anglr/dynamic/layout-relations';
 
 import {StoreDataService} from '../../../services/storeData';
@@ -35,6 +37,8 @@ import {ResolverStaticRegister} from '../misc';
             useFactory: (store: StoreDataService<LayoutRelationsMetadata>) => new MetadataStorage<RelationsNodeMetadata[]>(id => store.getData(id)?.relations ?? []),
             deps: [StoreDataService]
         },
+        provideBasicLayoutRelationsEditor(),
+        provideMaterialLayoutRelationsEditor(),
         provideHandlebarsLayoutRelationsEditor(),
         provideRestLayoutRelationsEditor(),
         provideTinyMceLayoutRelationsEditor(),

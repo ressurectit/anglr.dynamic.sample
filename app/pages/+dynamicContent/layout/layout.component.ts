@@ -9,7 +9,8 @@ import {provideCssLayoutEditor} from '@anglr/dynamic/css-components';
 import {provideTinyMceLayoutEditor} from '@anglr/dynamic/tinymce-components';
 import {provideHandlebarsLayoutEditor} from '@anglr/dynamic/handlebars-components';
 import {CustomComponentsRegister, provideEditorLayoutCustomComponents} from '@anglr/dynamic/layout-relations';
-import {StackPanelComponentOptions} from '@anglr/dynamic/basic-components';
+import {provideBasicLayoutEditor, StackPanelComponentOptions} from '@anglr/dynamic/basic-components';
+import {provideMaterialLayoutEditor} from '@anglr/dynamic/material-components';
 import {generateId} from '@jscrpt/common';
 
 import {StoreDataService} from '../../../services/storeData';
@@ -37,6 +38,8 @@ import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
             deps: [StoreDataService]
         },
         provideLayoutEditor(),
+        provideBasicLayoutEditor(),
+        provideMaterialLayoutEditor(),
         provideFormLayoutEditor(),
         provideCssLayoutEditor(),
         provideTinyMceLayoutEditor(),
