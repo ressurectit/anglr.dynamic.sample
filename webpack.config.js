@@ -311,7 +311,7 @@ export default [function(options, args)
                 ...prod ? {ngDevMode: false} : {},
                 ngI18nClosureMode: false,
                 ngDesignerMetadata: true,
-                ngDynamicMonacoPath: prod ? JSON.stringify('www/dist') : JSON.stringify('dist'),
+                ngDynamicMonacoPath: prod ? JSON.stringify('www') : JSON.stringify('dist'),
             }),
             new MiniCssExtractPlugin(
             {
