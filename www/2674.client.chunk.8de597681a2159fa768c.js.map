@@ -1,1 +1,0 @@
-{"version":3,"file":"2674.client.chunk.8de597681a2159fa768c.js","mappings":"qJAAA,MACA,EADmB,CAAC,a","sources":["webpack://ng-universal-demo/./node_modules/@anglr/dynamic/es2020/css-components/src/types.js"],"sourcesContent":["const components = ['styleBlock'];\nexport default components;"],"names":[],"sourceRoot":""}

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[1573],{51573:(e,a,t)=>{t.r(a),t.d(a,{default:()=>s});const s=["activatedRoute","triggerData"]}}]);
-//# sourceMappingURL=1573.client.chunk.a1e3ebb2132c1bdc5f5f.js.map

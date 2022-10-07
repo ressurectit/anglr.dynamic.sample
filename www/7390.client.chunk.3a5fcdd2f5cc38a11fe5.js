@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[7390],{37390:(e,t,s)=>{s.r(t),s.d(t,{GridPanelLayoutEditorMetadata:()=>n});class n{constructor(){this.metaInfo={name:"Grid",description:"Layout component with rows, and columns",group:"Layout"},this.getDescendants=e=>e?.cells??[],Object.freeze(this)}}}}]);
-//# sourceMappingURL=7390.client.chunk.3a5fcdd2f5cc38a11fe5.js.map

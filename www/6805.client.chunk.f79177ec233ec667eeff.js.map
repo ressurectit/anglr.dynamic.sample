@@ -1,1 +1,0 @@
-{"version":3,"file":"6805.client.chunk.f79177ec233ec667eeff.js","mappings":"qJAAA,MACA,EADkB,CAAC,O","sources":["webpack://ng-universal-demo/./node_modules/@anglr/dynamic/es2020/rest-components/src/relations.js"],"sourcesContent":["const relations = ['rest'];\nexport default relations;"],"names":[],"sourceRoot":""}

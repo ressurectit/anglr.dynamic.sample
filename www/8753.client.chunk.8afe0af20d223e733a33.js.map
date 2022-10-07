@@ -1,1 +1,0 @@
-{"version":3,"file":"8753.client.chunk.8afe0af20d223e733a33.js","mappings":"qJAAA,MAQA,EAPA,CACI,YACA,YACA,aACA,e","sources":["webpack://ng-universal-demo/./app/dynamicItems/types.ts"],"sourcesContent":["const components = \n[\n    'formBlock',\n    'gridTable',\n    'routerLink',\n    'submitButton',\n];\n\nexport default components;\n"],"names":[],"sourceRoot":""}
