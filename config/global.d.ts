@@ -1,5 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="../node_modules/@anglr/common/structured-log/src/types/structured-log.typings.d.ts" />
+/// <reference path="../node_modules/@anglr/common/typings/structured-log/index.d.ts" />
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../node_modules/@anglr/common/typings/positions/index.d.ts" />
 
 declare let isProduction: boolean;
 
@@ -11,4 +13,9 @@ interface ImportMeta
 declare module 'structured-log'
 {
     export = StructuredLog;
+}
+
+declare module 'positions'
+{
+    export = Positions;
 }

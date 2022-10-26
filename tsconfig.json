@@ -21,11 +21,6 @@
         "newLine": "lf",
         "moduleResolution": "node",
         "outDir": "wwwroot/app",
-        "baseUrl": ".",
-        "paths": 
-        {
-            "positions": ["node_modules/@anglr/common/positions/src/types/positions.typings.d.ts"]
-        },
         "lib":
         [
             "es2020",
