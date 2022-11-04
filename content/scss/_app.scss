@@ -147,6 +147,11 @@
         {
             margin-right: vars.$sizeXs;
         }
+
+        &.tight
+        {
+            padding: 2px 8px;
+        }
     }
 
     multi-button.btn

@@ -91,7 +91,7 @@ export class LayoutComponent implements OnInit
     protected get emptyMetadata(): LayoutComponentMetadata
     {
         return {
-            id: `stackPanel-${generateId(10)}`,
+            id: `root-${generateId(10)}`,
             displayName: 'root',
             package: 'basic-components',
             name: 'stackPanel',

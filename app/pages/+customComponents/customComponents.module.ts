@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {ModuleRoutes} from '@anglr/common/router';
 import {DynamicLayoutRelationsEditorModule} from '@anglr/dynamic/layout-relations';
+import {GridModule} from '@anglr/grid';
 
 import {components} from './customComponents.routes';
 import {EditorControlsSAComponent} from '../../components';
@@ -14,6 +16,8 @@ import {EditorControlsSAComponent} from '../../components';
     [
         DynamicLayoutRelationsEditorModule,
         EditorControlsSAComponent,
+        GridModule,
+        RouterModule,
     ],
     declarations:
     [

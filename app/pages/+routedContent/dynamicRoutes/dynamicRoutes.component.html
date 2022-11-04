@@ -14,7 +14,7 @@
         <basic-table-column id="permission" name="permission" title="Permission"></basic-table-column>
         <basic-table-column id="template" name="template" title="Template"></basic-table-column>
 
-        <basic-table-column id="remove" title="remove" [titleVisible]="false">
+        <basic-table-column id="actions" title="actions" [titleVisible]="false">
             <ng-template #bodyTemplate let-row>
                 <a class="btn-icon" (click)="remove(row)">
                     <span class="fas fa-trash"></span>

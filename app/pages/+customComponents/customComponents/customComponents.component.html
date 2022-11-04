@@ -1,0 +1,30 @@
+<div>Custom components</div>
+
+<div class="flex-row flex-end margin-bottom-small">
+    <button class="btn btn-primary" type="button" (click)="addCustomComponent()">
+        <span class="fas fa-plus"></span>
+        <span>add</span>
+    </button>
+</div>
+
+<ng-grid #grid [gridOptions]="gridOptions">
+    <basic-table-metadata>
+        <basic-table-column id="name" name="name" title="Name"></basic-table-column>
+
+        <basic-table-column id="remove" title="remove" [titleVisible]="false" width="200px">
+            <ng-template #bodyTemplate let-row>
+                <a class="btn-icon" (click)="removeCustomComponent(row.name)">
+                    <span class="fas fa-trash"></span>
+                </a>
+
+                <a class="btn btn-primary margin-left-small tight" [routerLink]="['../customComponents/layout', row.name]">
+                    <span>layout</span>
+                </a>
+
+                <a class="btn btn-primary margin-left-small tight" [routerLink]="['../customComponents/relations', row.name]">
+                    <span>relations</span>
+                </a>
+            </ng-template>
+        </basic-table-column>
+    </basic-table-metadata>
+</ng-grid>

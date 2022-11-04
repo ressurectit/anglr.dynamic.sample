@@ -1,0 +1,16 @@
+<form novalidate (submit)="$event.stopPropagation(); $event.preventDefault(); createCustomComponent();">
+    <div class="margin-bottom-small">
+        <label class="control-label">Name</label>
+        <input class="form-control" required [formControl]="name" hasError>
+    </div>
+
+    <div class="flex-row flex-end">
+        <button type="button" class="btn btn-info margin-right-extra-small" mat-dialog-close>
+            <span>close</span>
+        </button>
+
+        <button type="submit" class="btn btn-primary">
+            <span>ok</span>
+        </button>
+    </div>
+</form>

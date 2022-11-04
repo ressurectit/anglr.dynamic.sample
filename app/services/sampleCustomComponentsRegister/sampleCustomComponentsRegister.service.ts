@@ -37,22 +37,20 @@ export class SampleCustomComponentsRegister extends CustomComponentsRegister
     //######################### public methods #########################
 
     /**
-     * Toggles template as registered custom component
-     * @param name - Name of template to be toggled
+     * Adds custom component by its template name
+     * @param name - Name of template to be added
      */
-    public toggleRegisteredComponent(name: string): void
+    public addCustomComponent(name: string): void
     {
         const customComponents = this.getRegisteredComponents();
         const index = customComponents.indexOf(name);
 
         if(index >= 0)
         {
-            customComponents.splice(index, 1);
+            return;
         }
-        else
-        {
-            customComponents.push(name);
-        }
+            
+        customComponents.push(name);
 
         this._store.set(CUSTOM_COMPONENTS, customComponents);
         this._registeredChange.next();
