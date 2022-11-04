@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {PackageManager} from '@anglr/dynamic';
 
 /**
- * Layout package manager for demo app
+ * Relations package manager for sample app
  */
 @Injectable()
-export class DemoLayoutPackageManager extends PackageManager
+export class SampleRelationsPackageManager extends PackageManager
 {
     //######################### constructor #########################
     constructor()
     {
-        super('LAYOUT_PACKAGES_STORE');
+        super('RELATIONS_PACKAGES_STORE');
     }
 }

@@ -21,13 +21,13 @@ import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
 
 /**
- * Component used for displaying layout editor
+ * Component used for displaying layout editor for custom components
  */
 @Component(
 {
-    selector: 'layout-editor-view',
-    templateUrl: 'layout.component.html',
-    styleUrls: ['layout.component.scss'],
+    selector: 'custom-components-layout-editor-view',
+    templateUrl: 'customComponentsLayout.component.html',
+    styleUrls: ['customComponentsLayout.component.scss'],
     providers:
     [
         EditorHotkeys,
@@ -67,9 +67,9 @@ import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-@ComponentRouteAuthorized({path: 'layout/:id'})
-@Authorize('layoutEditor-page')
-export class LayoutComponent implements OnInit
+@ComponentRouteAuthorized({path: 'customComponents/layout/:id'})
+@Authorize('customComponentsLayoutEditor-page')
+export class CustomComponentsLayoutComponent implements OnInit
 {
     //######################### private fields #########################
 

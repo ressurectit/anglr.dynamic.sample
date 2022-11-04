@@ -52,6 +52,21 @@
             "$ref": "#/definitions/roles",
             "description": "Displaying admin page of resolver relations editor for dynamic content"
         },
+        "customComponents-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page for registered custom components"
+        },
+        "customComponentsLayoutEditor-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page for layout editor for registered custom components"
+        },
+        "customComponentsRelationsEditor-page":
+        {
+            "$ref": "#/definitions/roles",
+            "description": "Displaying admin page for relations editor for registered custom components"
+        },
         "metadata-editation":
         {
             "$ref": "#/definitions/roles",

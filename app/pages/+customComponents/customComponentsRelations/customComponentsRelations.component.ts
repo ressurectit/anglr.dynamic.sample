@@ -20,13 +20,13 @@ import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
 
 /**
- * Component used for displaying relations editor
+ * Component used for displaying relations editor for custom components
  */
 @Component(
 {
-    selector: 'relations-editor-view',
-    templateUrl: 'relations.component.html',
-    styleUrls: ['relations.component.scss'],
+    selector: 'custom-components-relations-editor-view',
+    templateUrl: 'customComponentsRelations.component.html',
+    styleUrls: ['customComponentsRelations.component.scss'],
     providers:
     [
         EditorHotkeys,
@@ -53,9 +53,9 @@ import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-@ComponentRouteAuthorized({path: 'relations/:id'})
-@Authorize('relationsEditor-page')
-export class RelationsComponent implements OnInit
+@ComponentRouteAuthorized({path: 'customComponents/relations/:id'})
+@Authorize('customComponentsRelationsEditor-page')
+export class CustomComponentsRelationsComponent implements OnInit
 {
     //######################### private fields #########################
 

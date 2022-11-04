@@ -1,6 +1,7 @@
 <div *authorize="'authenticated'" class="flex-row">
     <a routerLink="/" routerLinkActive="active" class="margin-right-small">Home</a>
     <a routerLink="/admin/dynamicRoutes" routerLinkActive="active" class="margin-right-small" *authorize="'dynamicRoutes-page'">Dynamic routes</a>
+    <a routerLink="/admin/customComponents" routerLinkActive="active" class="margin-right-small" *authorize="'customComponents-page'">Custom components</a>
     <div class="flex-1"></div>
     <a class="margin-horizontal-small" href="" (click)="loadDemo($event)">LOAD DEMO</a>
     <a (click)="logout()">Logout</a>

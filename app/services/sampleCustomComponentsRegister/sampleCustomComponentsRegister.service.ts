@@ -6,10 +6,10 @@ import {Observable, Subject} from 'rxjs';
 const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
 
 /**
- * Demo custom components register
+ * Sample custom components register
  */
 @Injectable()
-export class DemoCustomComponentsRegister extends CustomComponentsRegister
+export class SampleCustomComponentsRegister extends CustomComponentsRegister
 {
     //######################### private fields #########################
     
@@ -45,7 +45,6 @@ export class DemoCustomComponentsRegister extends CustomComponentsRegister
         const customComponents = this.getRegisteredComponents();
         const index = customComponents.indexOf(name);
 
-
         if(index >= 0)
         {
             customComponents.splice(index, 1);
@@ -55,6 +54,25 @@ export class DemoCustomComponentsRegister extends CustomComponentsRegister
             customComponents.push(name);
         }
 
+        this._store.set(CUSTOM_COMPONENTS, customComponents);
+        this._registeredChange.next();
+    }
+
+    /**
+     * Removes custom component by its template name
+     * @param name - Name of template to be removed
+     */
+    public removeCustomComponent(name: string): void
+    {
+        const customComponents = this.getRegisteredComponents();
+        const index = customComponents.indexOf(name);
+
+        if(index < 0)
+        {
+            return;
+        }
+        
+        customComponents.splice(index, 1);
         this._store.set(CUSTOM_COMPONENTS, customComponents);
         this._registeredChange.next();
     }

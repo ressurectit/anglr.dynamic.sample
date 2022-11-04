@@ -1,13 +1,16 @@
 {
     "$schema": "./permissions.schema.json",
-    "home-page":                    ["SUPERADMIN", "ADMIN", "USER"],
-    "dynamicRoutes-page":           ["SUPERADMIN", "ADMIN"],
-    "dynamicRouteDetail-page":      ["SUPERADMIN", "ADMIN"],
-    "layoutEditor-page":            ["SUPERADMIN", "ADMIN"],
-    "relationsEditor-page":         ["SUPERADMIN", "ADMIN"],
-    "resolverRelationsEditor-page": ["SUPERADMIN", "ADMIN"],
-    "metadata-editation":           ["SUPERADMIN"],
-    "logging-settings":             ["SUPERADMIN", "ADMIN"],
-    "debug-settings":               ["SUPERADMIN", "ADMIN"],
-    "debugInfo":                    ["SUPERADMIN", "ADMIN"]
+    "home-page":                             ["SUPERADMIN", "ADMIN", "USER"],
+    "dynamicRoutes-page":                    ["SUPERADMIN", "ADMIN"],
+    "dynamicRouteDetail-page":               ["SUPERADMIN", "ADMIN"],
+    "layoutEditor-page":                     ["SUPERADMIN", "ADMIN"],
+    "relationsEditor-page":                  ["SUPERADMIN", "ADMIN"],
+    "resolverRelationsEditor-page":          ["SUPERADMIN", "ADMIN"],
+    "customComponents-page":                 ["SUPERADMIN", "ADMIN"],
+    "customComponentsLayoutEditor-page":     ["SUPERADMIN", "ADMIN"],
+    "customComponentsRelationsEditor-page":  ["SUPERADMIN", "ADMIN"],
+    "metadata-editation":                    ["SUPERADMIN"],
+    "logging-settings":                      ["SUPERADMIN", "ADMIN"],
+    "debug-settings":                        ["SUPERADMIN", "ADMIN"],
+    "debugInfo":                             ["SUPERADMIN", "ADMIN"]
 }

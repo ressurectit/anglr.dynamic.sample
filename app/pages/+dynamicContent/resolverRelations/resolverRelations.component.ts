@@ -8,7 +8,7 @@ import {provideRestRelationsEditor} from '@anglr/dynamic/rest-components';
 import {provideTinyMceRelationsEditor} from '@anglr/dynamic/tinymce-components';
 
 import {StoreDataService} from '../../../services/storeData';
-import {DemoRelationsPackageManager} from '../../../services/demoRelationsPackageManager/demoRelationsPackageManager.service';
+import {SampleRelationsPackageManager} from '../../../services/sampleRelationsPackageManager/sampleRelationsPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleRelationsEditor} from '../../../dynamicItems/utils';
 import {ResolverStaticRegister} from '../misc';
@@ -32,7 +32,7 @@ import {ResolverStaticRegister} from '../misc';
         <ClassProvider>
         {
             provide: PackageManager,
-            useClass: DemoRelationsPackageManager,
+            useClass: SampleRelationsPackageManager,
         },
         createStoreDataServiceFactory('RESOLVER_RELATIONS_DATA'),
     ],

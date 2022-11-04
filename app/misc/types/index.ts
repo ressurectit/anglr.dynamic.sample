@@ -1,1 +1,0 @@
-export {KodPopisValue} from './kodPopisValue.interface';
