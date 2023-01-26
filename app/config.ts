@@ -1,5 +1,7 @@
+import {StringDictionary} from '@jscrpt/common';
+import {LogEventLevel} from 'structured-log';
+
 import defaultConfig from '../config/config.json';
-export type LogLevelString = 'off'|'fatal'|'error'|'warning'|'information'|'debug'|'verbose'|string;
 
 /**
  * Language definition
@@ -37,7 +39,7 @@ export interface SettingsConfiguration
     /**
      * Object hodling default headers that are send with rest requests
      */
-    defaultApiHeaders: { [key: string]: string };
+    defaultApiHeaders: StringDictionary;
 
     /**
      * Array of available themes
@@ -86,7 +88,7 @@ export interface SettingsLogging
     /**
      * Minimal log level for console sink
      */
-    consoleLogLevel: LogLevelString;
+    consoleLogLevel: keyof typeof LogEventLevel|string;
 }
 
 /**

@@ -1,238 +1,228 @@
 @use '../vars';
 
-//############## CONTROL LABEL ##############
-
-.control-label
+@mixin css
 {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-}
+    //############## CONTROL LABEL ##############
 
-//############## FORM CONTROL ##############
-
-%form-control
-{
-    border-radius: vars.$borderRadius;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: none;
-    font-size: 12px;
-    padding: 3px;
-    padding-left: 7px;
-    width: 100%;
-    font-family: "Inter";
-}
-
-.form-control:not(ng-select):not(date-time-selector)
-{
-    @extend %form-control;
-}
-
-ng-select.form-control
-{
-    .covid-normal-state
+    .control-label
     {
-        @extend %form-control;
-
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        row-gap: vars.$sizeXs;
-        padding-left: 3px;
-
-        .selected-value
-        {
-            margin-left: 4px;
-            flex: 1;
-            text-align: left;
-        }
-    }
-
-    .covid-live-input
-    {
-        padding: 0;
-        border: none;
-        width: 100%;
-        min-width: 150px;
-    }
-
-    .covid-live-wrapper
-    {
-        width: initial;
-        flex: 1;
-        margin-left: vars.$sizeXs;
-    }
-
-    .covid-select-tag
-    {
-        white-space: nowrap;
-        padding: 0 4px;
-        border-radius: 3px;
-        margin-left: vars.$sizeXs;
-    }
-
-    .covid-popup-div
-    {
-        padding: 5px 4px;
+        display: block;
+        font-size: 1em;
         font-weight: 500;
-        font-size: 0.9em;
     }
-}
 
-date-time-selector.form-control
-{
-    input-date-time-selector
+    //############## FORM CONTROL ##############
+
+    %form-control
     {
-        input
-        {
-            @extend %form-control;
-        }
+        border-radius: vars.$borderRadius;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: none;
+        font-size: 1em;
+        padding: 3px;
+        padding-left: 7px;
+        width: 100%;
+        font-family: "Inter";
+        color: var(--input-foreground);
+        border-color: var(--input-border);
+        background-color: var(--input-background);
     }
-}
 
-//############## INPUT GROUP ##############
-
-.input-group
-{
-    display: flex;
-    flex-direction: row;
-
-    .input-group-addon
+    %form-control-disabled
     {
-        font-size: 0.7em;
-        align-self: center;
-        padding: 3px 4px 4px;
-        border-top-style: solid;
-        border-bottom-style: solid;
-        border-top-width: 1px;
-        border-bottom-width: 1px;
-
-        &:first-child
+        &:disabled
         {
-            border-left-width: 1px;
-            border-left-style: solid;
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
+            background-color: transparent;
+            border-color: transparent;
+
+            .selected-caret
+            {
+                color: transparent;
+            }
         }
     }
 
-    .form-control
+    .form-control:not(ng-select)
     {
-        flex: 1;
-        min-width: 0;
-        min-height: 0;
-        border-radius: 0;
-
-        &:last-child
-        {
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-    }
-}
-
-//############## TIGHT ##############
-
-// .tight
-// {
-//     .btn
-//     {
-//         font-size: 0.8em;
-//         padding: 4px 8px;
-
-//         &:active:not(.disabled):not(.btn-select)
-//         {
-//             padding-left: 6px;
-//             padding-right: 6px;
-//             margin-left: 2px;
-//             margin-right: 2px;
-//         }
-//     }
-
-//     ng-select
-//     {
-//         button.btn-select,
-//         div.btn-select
-//         {
-//             font-size: 12px;
-//             padding: 3px;
-//         }
-
-//         .edit-normal-state
-//         {
-//             .btn-select
-//             {
-//                 padding: 0;
-
-//                 .edit-control
-//                 {
-//                     height: auto;
-//                     padding: 3px;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-//############## FORM ERRORS ##############
-
-.has-error
-{
-    %control-error
-    {
-        outline-color: transparent;
-        outline-style: solid;
-        outline-width: 2px;
+        @extend %form-control, %form-control-disabled;
     }
 
-    .form-control:not(ng-select):not(date-time-selector)
+    .form-control-static
     {
-        @extend %control-error;
+        padding: 3px;
+        padding-left: 3px;
+        padding-left: 7px;
+        margin-bottom: 0.9em;
+        color: var(--input-foreground);
     }
 
     ng-select.form-control
     {
-        .normal-state button.btn-select
+        .covid-normal-state
         {
-            @extend %control-error;
-
-            display: flex;
+            @extend %form-control, %form-control-disabled;
         }
 
-        .edit-normal-state div.btn-select
+        .covid-select-tag
         {
-            @extend %control-error;
-
-            display: flex;
+            background-color: var(--select-tag-background);
+            color: var(--select-tag-foreground);
         }
     }
 
-    date-time-selector.form-control
+    //############## INPUT GROUP ##############
+
+    .input-group
     {
-        input-date-time-selector
+        display: flex;
+        flex-direction: row;
+
+        .input-group-addon
         {
-            input
+            color: var(--input-foreground);
+            background-color: var(--input-error-background);
+            border-color: var(--input-border);
+            font-size: 0.7em;
+            align-self: center;
+            padding: 3px 4px 4px;
+            border-top-style: solid;
+            border-bottom-style: solid;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+
+            &:first-child
             {
-                @extend %control-error;
+                border-left-width: 1px;
+                border-left-style: solid;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+        }
+
+        .form-control
+        {
+            flex: 1;
+            min-width: 0;
+            min-height: 0;
+            border-radius: 0;
+
+            &:last-child
+            {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
             }
         }
     }
-}
 
-.validation-error-div
-{
-    font-size: 0.7em;
-}
+    //############## TIGHT ##############
 
-.form-error
-{
-    list-style: square;
-    display: list-item;
-    margin-left: 14px;
-}
+    // .tight
+    // {
+    //     .btn
+    //     {
+    //         font-size: 0.8em;
+    //         padding: 4px 8px;
 
-reserved-space-validation-errors-container>div
-{
-    min-height: .9em;
+    //         &:active:not(.disabled):not(.btn-select)
+    //         {
+    //             padding-left: 6px;
+    //             padding-right: 6px;
+    //             margin-left: 2px;
+    //             margin-right: 2px;
+    //         }
+    //     }
+
+    //     ng-select
+    //     {
+    //         button.btn-select,
+    //         div.btn-select
+    //         {
+    //             font-size: 12px;
+    //             padding: 3px;
+    //         }
+
+    //         .edit-normal-state
+    //         {
+    //             .btn-select
+    //             {
+    //                 padding: 0;
+
+    //                 .edit-control
+    //                 {
+    //                     height: auto;
+    //                     padding: 3px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    //############## FORM ERRORS ##############
+
+    .has-error
+    {
+        %control-error
+        {
+            outline-color: transparent;
+            outline-style: solid;
+            outline-width: 2px;
+            border-color: var(--input-invalid-border);
+
+            &:active,
+            &:focus
+            {
+                outline-color: var(--input-error-outline);
+            }
+        }
+
+        .control-label
+        {
+            color: var(--label-invalid-foreground);
+        }
+
+        .form-control:not(ng-select)
+        {
+            @extend %control-error;
+        }
+
+        ng-select.form-control
+        {
+            .normal-state button.btn-select
+            {
+                @extend %control-error;
+
+                display: flex;
+            }
+
+            .edit-normal-state div.btn-select
+            {
+                @extend %control-error;
+
+                display: flex;
+            }
+        }
+    }
+
+    .validation-error-div
+    {
+        font-size: 0.7em;
+
+        &>div
+        {
+            color: var(--label-invalid-background);
+        }
+    }
+
+    .form-error
+    {
+        list-style: square;
+        display: list-item;
+        margin-left: 14px;
+    }
+
+    reserved-space-validation-errors-container>div
+    {
+        min-height: .9em;
+    }
 }

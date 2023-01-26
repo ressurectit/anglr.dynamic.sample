@@ -7,7 +7,7 @@ declare let isProduction: boolean;
 
 interface ImportMeta
 {
-    webpackHot: boolean;
+    webpackHot?: boolean;
 }
 
 declare module 'structured-log'

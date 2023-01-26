@@ -1,2 +1,4 @@
+@use '@anglr/datetime/styles/themes/light' as dateTimeTheme;
 @use '@anglr/dynamic/styles/themes/light' as dynamicTheme;
-@use 'scss/theme/theme' with ($themeName: 'light', $tooltipTheme: 'dark', $datetimeTheme: 'default', $dynamicTheme: dynamicTheme.defineTheme());
+@use './scss/theme/light' as appTheme;
+@use 'scss/theme/theme' with ($theme: appTheme.defineTheme(), $themeName: 'light', $tooltipTheme: 'dark', $dateTimeTheme: dateTimeTheme.defineTheme(), $dynamicTheme: dynamicTheme.defineTheme());

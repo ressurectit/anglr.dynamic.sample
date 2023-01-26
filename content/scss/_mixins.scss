@@ -1,133 +1,54 @@
-@use 'sass:color';
-@use 'sass:map';
+@use 'sass:math';
 
-@use 'vars';
-
-@mixin generate-margin-padding($type, $sizes)
+@mixin thin-scrollbar-color($color)
 {
-    @each $sizeType, $size in $sizes
+    .thin-scrollbar
     {
-        .#{$type}-#{$sizeType}
-        {
-            #{$type}: $size;
-        }
+        scrollbar-color: var($color) transparent;
+    }
 
-        .#{$type}-right-#{$sizeType}
-        {
-            #{$type}-right: $size;
-        }
+    .thin-scrollbar::-webkit-scrollbar-thumb
+    {
+        background-color: var($color);
+    }
 
-        .#{$type}-left-#{$sizeType}
-        {
-            #{$type}-left: $size;
-        }
+    .thin-scrollbar::-webkit-scrollbar-track
+    {
+        background-color: transparent;
+    }
 
-        .#{$type}-top-#{$sizeType}
-        {
-            #{$type}-top: $size;
-        }
-
-        .#{$type}-bottom-#{$sizeType}
-        {
-            #{$type}-bottom: $size;
-        }
-
-        .#{$type}-horizontal-#{$sizeType}
-        {
-            #{$type}-left: $size;
-            #{$type}-right: $size;
-        }
-
-        .#{$type}-vertical-#{$sizeType}
-        {
-            #{$type}-top: $size;
-            #{$type}-bottom: $size;
-        }
+    .thin-scrollbar::-webkit-scrollbar
+    {
+        background-color: transparent;
     }
 }
 
-@mixin generate-button($colors)
+@function strip-unit($value)
 {
-    @each $name, $color in $colors
-    {
-        
-        $background: map-get($color, "background");
-        $foreground: map-get($color, "foreground");
-
-        .btn-#{$name}
-        {
-            background-color: $background;
-            border-color: $background;
-            color: $foreground;
-
-            &:active:not(.disabled)
-            {
-                background-color: color.scale($background, $lightness: -18%);
-                border-color: color.scale($background, $lightness: -18%);
-            }
-
-            &:hover,
-            &:focus
-            {
-                background-color: color.scale($background, $lightness: -12%);
-                border-color: color.scale($background, $lightness: -12%);
-            }
-
-            &>span
-            {
-                color: $foreground;
-            }
-
-            &>span[class^="fa"],
-            &>span[class^="fas"],
-            &>span[class^="glyphicon"]
-            {
-                color: color.scale($background, $lightness: -26%);
-            }
-        }
-    }
+    @return math.div($value, ($value * 0 + 1));
 }
 
-@mixin generate-alert($colors)
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) 
 {
-    @each $name, $color in $colors
+    $u1: math.unit($min-vw);
+    $u2: math.unit($max-vw);
+    $u3: math.unit($min-font-size);
+    $u4: math.unit($max-font-size);
+
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 
     {
-        $background: map-get($color, "background");
-        $foreground: map-get($color, "foreground");
+        & 
+        {
+            font-size: $min-font-size;
 
-        .alert-#{$name}
-        {
-            background-color: color.scale($background, $lightness: 22%);
-            color: $foreground;
-            border-color: $background;
-        }
-    }
-}
-
-@mixin thin-scrollbar-color($theme, $color, $lightness: -30%)
-{
-    @if $lightness 
-    {
-        .thin-scrollbar
-        {
-            scrollbar-color: color.scale(map.get($theme, $color), $lightness: $lightness) transparent;
-        }
-
-        .thin-scrollbar::-webkit-scrollbar-thumb
-        {
-            background-color: color.scale(map.get($theme, $color), $lightness: $lightness);
-        }
-    }
-    @else
-    {
-        .thin-scrollbar
-        {
-            scrollbar-color: color.scale(map.get($theme, $color), $lightness: $lightness) transparent;
-        }
-
-        .thin-scrollbar::-webkit-scrollbar-thumb
-        {
-            background-color: color.scale(map.get($theme, $color), $lightness: $lightness);
+            @media screen and (min-width: $min-vw) 
+            {
+                font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+            @media screen and (min-width: $max-vw) 
+            {
+                font-size: $max-font-size;
+            }
         }
     }
 }

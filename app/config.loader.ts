@@ -1,6 +1,7 @@
 import {Dictionary} from '@jscrpt/common';
 
 import {Configuration, config as cfg} from './config';
+import defaultConfig from '../config/config.json';
 
 /**
  * Overrides config
@@ -42,6 +43,17 @@ function overrideConfig(override: Configuration)
 }
 
 /**
+ * Loads default config
+ */
+export function loadDefaultConfig(): void
+{
+    Object.keys(defaultConfig).forEach(key =>
+    {
+        (cfg as unknown as Dictionary)[key] = (defaultConfig as Dictionary)[key];
+    });
+}
+
+/**
  * Function used for loading configuration
  */
 export async function loadConfig(): Promise<void>
@@ -53,6 +65,8 @@ export async function loadConfig(): Promise<void>
         return await response.json();
     };
     
+    loadDefaultConfig();
+
     try
     {
         //default configuration
@@ -60,10 +74,8 @@ export async function loadConfig(): Promise<void>
     
         Object.keys(config).forEach(key =>
         {
-            const cfgDictionary = cfg as unknown as Dictionary<unknown>;
-            const configDictionary = config as unknown as Dictionary<unknown>;
-
-            cfgDictionary[key] = configDictionary[key];
+            (cfg as unknown as Dictionary)[key] = (defaultConfig as Dictionary)[key];
+            (cfg as unknown as Dictionary)[key] = (config as unknown as Dictionary)[key];
         });
     }
     catch(e)

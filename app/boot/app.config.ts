@@ -13,8 +13,7 @@ import {ConfirmationDialogOptions, CONFIRMATION_DIALOG_OPTIONS, MovableTitledDia
 import {FLOATING_UI_POSITION} from '@anglr/common/floating-ui';
 import {MD_HELP_NOTIFICATIONS, RenderMarkdownConfig, RENDER_MARKDOWN_CONFIG} from '@anglr/md-help/web';
 import {ClientErrorHandlingMiddleware, HttpClientErrorCustomHandlerDef, HTTP_CLIENT_ERROR_CUSTOM_HANDLER, REST_ERROR_HANDLING_MIDDLEWARE_ORDER} from '@anglr/error-handling/rest';
-import {NORMAL_STATE_OPTIONS, NormalStateOptions, POSITIONER_TYPE} from '@anglr/select';
-import {PopperJsPositionerComponent} from '@anglr/select/popperJs';
+import {NORMAL_STATE_OPTIONS, NormalStateOptions} from '@anglr/select';
 import {DATE_API} from '@anglr/datetime';
 import {DateFnsDateApi, DateFnsLocale, DATE_FNS_DATE_API_OBJECT_TYPE, DATE_FNS_FORMAT_PROVIDER, DATE_FNS_LOCALE} from '@anglr/datetime/date-fns';
 import {LoggerMiddleware, MockLoggerMiddleware, ReportProgressMiddleware, ResponseTypeMiddleware, REST_METHOD_MIDDLEWARES, REST_MOCK_LOGGER} from '@anglr/rest';
@@ -36,7 +35,7 @@ import {RestMockLoggerService} from '../services/api/restMockLogger';
  * Creates APP initialization factory, that first try to authorize user before doing anything else
  * @param authService Authentication service used for authentication of user
  */
-export function appInitializerFactory(authService: AuthenticationService<any>): () => Promise<void>
+export function appInitializerFactory(authService: AuthenticationService): () => Promise<void>
 {
     return async () =>
     {
@@ -202,18 +201,13 @@ export const providers: Provider[] =
     <ValueProvider>
     {
         provide: NORMAL_STATE_OPTIONS,
-        useValue: <NormalStateOptions<any>>
+        useValue: <NormalStateOptions>
         {
             texts:
             {
                 nothingSelected: NOTHING_SELECTED
             }
         }
-    },
-    <ValueProvider>
-    {
-        provide: POSITIONER_TYPE,
-        useValue: PopperJsPositionerComponent,
     },
 
     //######################### STRING LOCALIZATION #########################
@@ -237,8 +231,7 @@ export const providers: Provider[] =
         provide: ConsoleSinkConfigService,
         useFactory: (settingsSvc: SettingsService) =>
         {
-            return new ConsoleSinkConfigService(undefined, LogEventLevel[settingsSvc?.settingsLogging?.consoleLogLevel as any] as any);
-            //TODO: solve typings
+            return new ConsoleSinkConfigService(undefined, LogEventLevel[settingsSvc.settingsLogging.consoleLogLevel as keyof typeof LogEventLevel]);
         },
         deps: [SettingsService]
     },
@@ -382,7 +375,7 @@ export const providers: Provider[] =
             ResponseTypeMiddleware,
             ReportProgressMiddleware,
             ClientErrorHandlingMiddleware,
-            ...jsDevMode ? [...config.configuration?.disableMockLogger ? [] : [MockLoggerMiddleware]] : [],
+            ...jsDevMode ? [...config.configuration.disableMockLogger ? [] : [MockLoggerMiddleware]] : [],
         ]
     },
     <ValueProvider>
@@ -427,6 +420,6 @@ export const providers: Provider[] =
         useValue: <Record<number, HttpClientErrorCustomHandlerDef>>
         {
             404: [handle404Func, error => new RestNotFoundError(error.errors)],
-        }
+        },
     },
 ];
