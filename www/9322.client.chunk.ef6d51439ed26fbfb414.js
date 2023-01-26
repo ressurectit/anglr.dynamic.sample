@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[9322],{19322:(e,u,n)=>{n.r(u),n.d(u,{default:()=>s});const s=["formBlock","gridTable","routerLink","submitButton"]}}]);
-//# sourceMappingURL=9322.client.chunk.ef6d51439ed26fbfb414.js.map

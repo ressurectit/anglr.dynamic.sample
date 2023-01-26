@@ -1,1 +1,0 @@
-{"version":3,"file":"7260.client.chunk.1691ce8b32f46c644b5f.js","mappings":"qJAAA,MAIA,EAHA,E","sources":["webpack://ng-universal-demo/../../../form/src/relations.ts"],"sourcesContent":["const relations: string[] =\n[\n];\n\nexport default relations;\n"],"names":[],"sourceRoot":""}

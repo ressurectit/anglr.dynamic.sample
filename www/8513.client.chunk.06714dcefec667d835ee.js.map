@@ -1,1 +1,0 @@
-{"version":3,"file":"8513.client.chunk.06714dcefec667d835ee.js","mappings":"qJAAA,MAMA,EALA,CACI,iBACA,c","sources":["webpack://ng-universal-demo/./app/dynamicItems/relations.ts"],"sourcesContent":["const relations =\n[\n    'activatedRoute',\n    'triggerData',\n];\n\nexport default relations;\n"],"names":[],"sourceRoot":""}

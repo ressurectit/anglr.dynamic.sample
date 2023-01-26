@@ -1,1 +1,0 @@
-{"version":3,"file":"5435.client.chunk.539a310a53b6e093d36c.js","mappings":"qJAAA,MAKA,EAJA,CACI,e","sources":["webpack://ng-universal-demo/../../../handlebars-components/src/relations.ts"],"sourcesContent":["const relations =\n[\n    'dataTemplate',\n];\n\nexport default relations;\n"],"names":[],"sourceRoot":""}

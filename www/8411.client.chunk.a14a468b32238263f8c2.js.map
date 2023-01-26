@@ -1,0 +1,1 @@
+{"version":3,"file":"8411.client.chunk.a14a468b32238263f8c2.js","mappings":"qJAAA,MAKA,EAJA,CACI,O","sources":["webpack://ng-universal-demo/../../../rest-components/src/relations.ts"],"sourcesContent":["const relations =\n[\n    'rest',\n];\n\nexport default relations;\n"],"names":[],"sourceRoot":""}

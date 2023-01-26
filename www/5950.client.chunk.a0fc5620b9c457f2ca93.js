@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkng_universal_demo=self.webpackChunkng_universal_demo||[]).push([[5950],{35950:(e,t,n)=>{n.r(t),n.d(t,{GridPanelCellLayoutEditorMetadata:()=>s});var a=n(88566);class s{constructor(){this.metaInfo={name:"Grid cell",dragDisabled:!0},this.addDescendant=(e,t,n)=>{t.component=e},this.applyDesignerStyles=a.j,this.canDropMetadata=e=>!e?.component,this.removeDescendant=(e,t)=>{t.component?.id===e&&(t.component=void 0)},Object.freeze(this)}}}}]);
+//# sourceMappingURL=5950.client.chunk.a0fc5620b9c457f2ca93.js.map
