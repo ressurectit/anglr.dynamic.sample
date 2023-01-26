@@ -1,8 +1,11 @@
 import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef, Optional, OnInit, OnDestroy} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {GoBackModule, TooltipModule} from '@anglr/common';
 import {AuthorizationModule} from '@anglr/authentication';
 import {TitledDialogService} from '@anglr/common/material';
+import {ShowCustomComponentOptionsSADirective} from '@anglr/dynamic/layout-relations';
+import {LiveEventService} from '@anglr/dynamic/layout-editor';
 import {CodeEditorDialogComponent, CodeEditorDialogData, CodeEditorContent, JsonLanguageModel, MetadataHistoryManager, EditorHotkeys} from '@anglr/dynamic';
 import {GlobalNotificationsService} from '@anglr/notifications';
 import {isPresent} from '@jscrpt/common';
@@ -22,6 +25,8 @@ import {lastValueFrom, Subscription} from 'rxjs';
         GoBackModule,
         TooltipModule,
         AuthorizationModule,
+        ShowCustomComponentOptionsSADirective,
+        MatSlideToggleModule,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -48,6 +53,18 @@ export class EditorControlsSAComponent<TMetadata = any> implements OnInit, OnDes
     @Input()
     public history: MetadataHistoryManager|null = null;
 
+    /**
+     * Indication whether are these controls for custom component
+     */
+    @Input()
+    public customComponent: boolean = false;
+
+    /**
+     * Id of custom component that is being edited, used with customComponent
+     */
+    @Input()
+    public customComponentId: string = '';
+
     //######################### public properties - outputs #########################
 
     /**
@@ -66,6 +83,7 @@ export class EditorControlsSAComponent<TMetadata = any> implements OnInit, OnDes
     constructor(private _changeDetector: ChangeDetectorRef,
                 private _dialog: TitledDialogService,
                 private _notifications: GlobalNotificationsService,
+                protected liveEvents: LiveEventService,
                 @Optional() private _hotkeys?: EditorHotkeys,)
     {
     }

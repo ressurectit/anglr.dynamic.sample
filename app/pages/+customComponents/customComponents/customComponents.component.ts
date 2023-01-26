@@ -10,6 +10,7 @@ import {SampleCustomComponentsRegister} from '../../../services/sampleCustomComp
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {StoreDataService} from '../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../misc/interfaces';
+import {DYNAMIC_CONTENT_DATA} from '../../../misc/constants';
 
 /**
  * Component used for displaying custom components editation
@@ -21,7 +22,7 @@ import {LayoutRelationsMetadata} from '../../../misc/interfaces';
     providers: 
     [
         SampleCustomComponentsRegister,
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

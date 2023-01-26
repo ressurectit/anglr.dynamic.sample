@@ -19,6 +19,7 @@ import {SampleCustomComponentsRegister} from '../../../services/sampleCustomComp
 import {SampleLayoutPackageManager} from '../../../services/sampleLayoutPackageManager/sampleLayoutPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
+import {DYNAMIC_CONTENT_DATA} from '../../../misc/constants';
 
 /**
  * Component used for displaying layout editor
@@ -63,7 +64,7 @@ import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
             deps: [SampleCustomComponentsRegister],
             multi: true,
         },
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

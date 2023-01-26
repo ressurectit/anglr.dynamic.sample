@@ -1,4 +1,4 @@
-<div class="flex-row margin-top-small margin-horizontal-small">
+<div class="flex-row margin-top-small margin-horizontal-small align-items-center">
     <button type="button" class="btn btn-info" goBack>
         <span class="fas fa-arrow-left"></span>
         <span>back</span>
@@ -7,6 +7,11 @@
     <button type="button" class="btn btn-primary margin-left-extra-small" (click)="saveMetadata()">
         <span class="fas fa-save"></span>
         <span>save <ng-container *ngIf="!(history?.saved ?? true)">*</ng-container></span>
+    </button>
+
+    <button type="button" class="btn btn-primary margin-left-extra-small" [showCustomComponentOptions]="customComponentId" *ngIf="customComponent">
+        <span class="fas fa-cog"></span>
+        <span>options</span>
     </button>
 
     <button type="button" class="btn btn-primary margin-left-extra-small" (click)="editMetadata()" *authorize="'metadata-editation'">
@@ -21,4 +26,8 @@
     <button class="btn-icon margin-left-extra-small" tooltip="redo" *ngIf="history" (click)="history.redo()">
         <span class="fas fa-redo"></span>
     </button>
+
+    <mat-slide-toggle [checked]="liveEvents.enabled" (change)="liveEvents.setEnabled(!liveEvents.enabled)" class="margin-left-extra-small">
+        <span class="text-uppercase">live events</span>
+    </mat-slide-toggle>
 </div>

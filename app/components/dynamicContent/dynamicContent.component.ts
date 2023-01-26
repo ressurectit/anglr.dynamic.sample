@@ -20,6 +20,7 @@ import {StoreDataService} from '../../services/storeData';
 import {createStoreDataServiceFactory} from '../../misc/factories';
 import {DynamicRouteData} from '../../services/dynamicRoutes';
 import {provideSampleLayoutRelations} from '../../dynamicItems/utils';
+import {DYNAMIC_CONTENT_DATA} from '../../misc/constants';
 
 /**
  * Component used displaying dynamic content pages
@@ -59,7 +60,7 @@ import {provideSampleLayoutRelations} from '../../dynamicItems/utils';
         provideRestLayoutRelations(),
         provideFormLayoutRelations(),
         provideSampleLayoutRelations(),
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

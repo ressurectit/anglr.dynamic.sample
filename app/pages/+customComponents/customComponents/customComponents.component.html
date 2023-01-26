@@ -1,6 +1,6 @@
 <div>Custom components</div>
 
-<div class="flex-row flex-end margin-bottom-small">
+<div class="flex-row flex-end margin-bottom-small margin-horizontal-small">
     <button class="btn btn-primary" type="button" (click)="addCustomComponent()">
         <span class="fas fa-plus"></span>
         <span>add</span>
@@ -11,9 +11,9 @@
     <basic-table-metadata>
         <basic-table-column id="name" name="name" title="Name"></basic-table-column>
 
-        <basic-table-column id="remove" title="remove" [titleVisible]="false" width="200px">
+        <basic-table-column id="remove" title="remove" [titleVisible]="false" width="200px" cellClass="flex-row align-items-center">
             <ng-template #bodyTemplate let-row>
-                <a class="btn-icon" (click)="removeCustomComponent(row.name)">
+                <a class="btn-icon" confirmation="Do you wish to remove this component?" (confirm)="removeCustomComponent(row.name)" confirmationConfirm="yes" confirmationCancel="no">
                     <span class="fas fa-trash"></span>
                 </a>
 

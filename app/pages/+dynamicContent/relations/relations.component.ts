@@ -18,6 +18,7 @@ import {SampleCustomComponentsRegister} from '../../../services/sampleCustomComp
 import {SampleRelationsPackageManager} from '../../../services/sampleRelationsPackageManager/sampleRelationsPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
+import {DYNAMIC_CONTENT_DATA} from '../../../misc/constants';
 
 /**
  * Component used for displaying relations editor
@@ -49,7 +50,7 @@ import {provideSampleLayoutRelationsEditor} from '../../../dynamicItems/utils';
             provide: PackageManager,
             useClass: SampleRelationsPackageManager,
         },
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

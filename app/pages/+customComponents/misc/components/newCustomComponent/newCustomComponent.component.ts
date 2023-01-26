@@ -10,6 +10,7 @@ import {createStoreDataServiceFactory} from '../../../../../misc/factories';
 import {StoreDataService} from '../../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../../misc/interfaces';
 import {SampleCustomComponentsRegister} from '../../../../../services/sampleCustomComponentsRegister';
+import {DYNAMIC_CONTENT_DATA} from '../../../../../misc/constants';
 
 /**
  * Component used for adding new custom component as dialog
@@ -29,7 +30,7 @@ import {SampleCustomComponentsRegister} from '../../../../../services/sampleCust
     [
         SampleCustomComponentsRegister,
         SubmittedService,
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

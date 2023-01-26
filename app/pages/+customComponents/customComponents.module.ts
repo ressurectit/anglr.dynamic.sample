@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ModuleRoutes} from '@anglr/common/router';
+import {ConfirmationDialogModule} from '@anglr/common/material';
 import {DynamicLayoutRelationsEditorModule} from '@anglr/dynamic/layout-relations';
 import {GridModule} from '@anglr/grid';
 
@@ -14,8 +15,9 @@ import {EditorControlsSAComponent} from '../../components';
 {
     imports:
     [
-        DynamicLayoutRelationsEditorModule,
         EditorControlsSAComponent,
+        DynamicLayoutRelationsEditorModule,
+        ConfirmationDialogModule,
         GridModule,
         RouterModule,
     ],

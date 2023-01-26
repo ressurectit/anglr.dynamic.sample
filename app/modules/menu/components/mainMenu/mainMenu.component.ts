@@ -10,6 +10,7 @@ import {StoreDataService} from '../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
 import {demoDetailLayout, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
 import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
+import {DYNAMIC_CONTENT_DATA} from '../../../../misc/constants';
 
 /**
  * Component used for displaying application main menu
@@ -20,7 +21,7 @@ import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
     templateUrl: 'mainMenu.component.html',
     providers:
     [
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -19,6 +19,7 @@ import {SampleCustomComponentsRegister} from '../../../services/sampleCustomComp
 import {SampleLayoutPackageManager} from '../../../services/sampleLayoutPackageManager/sampleLayoutPackageManager.service';
 import {createStoreDataServiceFactory} from '../../../misc/factories';
 import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
+import {DYNAMIC_CONTENT_DATA} from '../../../misc/constants';
 
 /**
  * Component used for displaying layout editor for custom components
@@ -63,7 +64,7 @@ import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
             deps: [SampleCustomComponentsRegister],
             multi: true,
         },
-        createStoreDataServiceFactory('DYNAMIC_CONTENT_DATA'),
+        createStoreDataServiceFactory(DYNAMIC_CONTENT_DATA),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -71,14 +72,12 @@ import {provideSampleLayoutEditor} from '../../../dynamicItems/utils';
 @Authorize('customComponentsLayoutEditor-page')
 export class CustomComponentsLayoutComponent implements OnInit
 {
-    //######################### private fields #########################
+    //######################### protected properties - template bindings #########################
 
     /**
      * Id of layout template
      */
-    private _id: string = '';
-
-    //######################### protected properties - template bindings #########################
+    protected id: string = '';
 
     /**
      * Current metadata
@@ -119,9 +118,9 @@ export class CustomComponentsLayoutComponent implements OnInit
     {
         this._route.params.subscribe(({id}) =>
         {
-            this._id = id;
+            this.id = id;
 
-            this.metadata = this._store.getData(this._id)?.layout ?? this.emptyMetadata;
+            this.metadata = this._store.getData(this.id)?.layout ?? this.emptyMetadata;
         });
     }
 
@@ -132,9 +131,9 @@ export class CustomComponentsLayoutComponent implements OnInit
      */
     protected save(): void
     {
-        const metadata = this._store.getData(this._id) ?? {};
+        const metadata = this._store.getData(this.id) ?? {};
         metadata.layout = this._metaManager.getMetadata() ?? undefined;
         
-        this._store.setData(this._id, metadata);
+        this._store.setData(this.id, metadata);
     }
 }
