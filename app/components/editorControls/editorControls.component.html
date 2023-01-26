@@ -27,7 +27,7 @@
         <span class="fas fa-redo"></span>
     </button>
 
-    <mat-slide-toggle [checked]="liveEvents.enabled" (change)="liveEvents.setEnabled(!liveEvents.enabled)" class="margin-left-extra-small">
+    <mat-slide-toggle *ngIf="liveEvents" [checked]="liveEvents.enabled" (change)="liveEvents.setEnabled(!liveEvents.enabled)" class="margin-left-extra-small">
         <span class="text-uppercase">live events</span>
     </mat-slide-toggle>
 </div>

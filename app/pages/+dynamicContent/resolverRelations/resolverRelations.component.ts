@@ -4,6 +4,7 @@ import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
 import {EditorHotkeys, MetadataHistoryManager, MetadataStateManager, METADATA_STATE_MANAGER, PackageManager} from '@anglr/dynamic';
 import {provideRelationsEditorWithStatic, RelationsNodeMetadata, RELATIONS_HISTORY_MANAGER} from '@anglr/dynamic/relations-editor';
 import {provideHandlebarsRelationsEditor} from '@anglr/dynamic/handlebars-components';
+import {provideBasicRelationsEditor} from '@anglr/dynamic/basic-components';
 import {provideRestRelationsEditor} from '@anglr/dynamic/rest-components';
 import {provideTinyMceRelationsEditor} from '@anglr/dynamic/tinymce-components';
 
@@ -24,6 +25,7 @@ import {ResolverStaticRegister} from '../misc';
     providers:
     [
         EditorHotkeys,
+        provideBasicRelationsEditor(),
         provideHandlebarsRelationsEditor(),
         provideRestRelationsEditor(),
         provideTinyMceRelationsEditor(),

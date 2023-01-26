@@ -83,7 +83,7 @@ export class EditorControlsSAComponent<TMetadata = any> implements OnInit, OnDes
     constructor(private _changeDetector: ChangeDetectorRef,
                 private _dialog: TitledDialogService,
                 private _notifications: GlobalNotificationsService,
-                protected liveEvents: LiveEventService,
+                @Optional() protected liveEvents?: LiveEventService,
                 @Optional() private _hotkeys?: EditorHotkeys,)
     {
     }

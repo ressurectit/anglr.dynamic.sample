@@ -49,8 +49,8 @@ export class SubmitButtonSAComponent extends LayoutComponentBase<SubmitButtonCom
     /**
      * Output used for emitting new void object value when clicked
      */
-    @DynamicOutput()
-    public click: VoidObject = {};
+    @DynamicOutput({skipInit: true,})
+    public click: VoidObject|undefined|null;
 
     //######################### protected - overrides #########################
 

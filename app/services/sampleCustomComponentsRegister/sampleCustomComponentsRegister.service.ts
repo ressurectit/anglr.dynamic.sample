@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import {CustomComponentsRegister} from '@anglr/dynamic/layout-relations';
+import {CustomComponentConfiguration, CustomComponentsRegister} from '@anglr/dynamic/layout-relations';
 import {PermanentStorage, PERMANENT_STORAGE} from '@anglr/common';
+import {Dictionary} from '@jscrpt/common';
 import {Observable, Subject} from 'rxjs';
 
 const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
@@ -9,7 +10,7 @@ const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
  * Sample custom components register
  */
 @Injectable()
-export class SampleCustomComponentsRegister extends CustomComponentsRegister
+export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfiguration = CustomComponentConfiguration> extends CustomComponentsRegister
 {
     //######################### private fields #########################
     
@@ -42,15 +43,16 @@ export class SampleCustomComponentsRegister extends CustomComponentsRegister
      */
     public addCustomComponent(name: string): void
     {
-        const customComponents = this.getRegisteredComponents();
-        const index = customComponents.indexOf(name);
+        const customComponentsNames = this.getRegisteredComponents();
+        const index = customComponentsNames.indexOf(name);
 
         if(index >= 0)
         {
             return;
         }
             
-        customComponents.push(name);
+        const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
+        customComponents[name] = {} as TConfig;
 
         this._store.set(CUSTOM_COMPONENTS, customComponents);
         this._registeredChange.next();
@@ -62,26 +64,61 @@ export class SampleCustomComponentsRegister extends CustomComponentsRegister
      */
     public removeCustomComponent(name: string): void
     {
-        const customComponents = this.getRegisteredComponents();
-        const index = customComponents.indexOf(name);
+        const customComponentsNames = this.getRegisteredComponents();
+        const index = customComponentsNames.indexOf(name);
 
         if(index < 0)
         {
             return;
         }
         
-        customComponents.splice(index, 1);
-        this._store.set(CUSTOM_COMPONENTS, customComponents);
+        const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
+        delete customComponents[name];
+        
+        this._store.set(CUSTOM_COMPONENTS, customComponentsNames);
         this._registeredChange.next();
     }
 
     //######################### public methods - overrides #########################
 
     /**
-     * Gets registered components
+     * @inheritdoc
      */
     public override getRegisteredComponents(): string[]
     {
-        return this._store.get<string[]|null>(CUSTOM_COMPONENTS) ?? [];
+        return Object.keys(this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {});
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public override getConfigurationForComponent(name: string): TConfig|undefined|null
+    {
+        const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
+
+        if(!customComponents[name])
+        {
+            return null;
+        }
+
+        return customComponents[name];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public override setConfigurationForComponent(name: string, config: TConfig): void
+    {
+        const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
+
+        if(!customComponents[name])
+        {
+            return;
+        }
+
+        customComponents[name] = config;
+        
+        this._store.set(CUSTOM_COMPONENTS, customComponents);
+        this._registeredChange.next();
     }
 }

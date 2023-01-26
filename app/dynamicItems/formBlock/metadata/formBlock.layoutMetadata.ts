@@ -55,11 +55,6 @@ export class FormBlockLayoutEditorMetadata implements LayoutEditorMetadataDescri
     /**
      * @inheritdoc
      */
-    public getDescendants?: Func<LayoutComponentMetadata[], [FormBlockComponentOptions|undefined|null]> = options => options?.content ? [options?.content] : [];
-
-    /**
-     * @inheritdoc
-     */
     public removeDescendant?: Action<[string, FormBlockComponentOptions]> = (_, options) =>
     {
         options.content = null;

@@ -53,10 +53,10 @@ export class ActivatedRouteRelations implements RelationsComponent<ActivatedRout
 
         route.params.subscribe(params => this.params = params);
         route.data.subscribe(data =>
-            {
-                console.log(data);
-                this.data = data;
-            } );
+        {
+            console.log(data);
+            this.data = data;
+        });
     }
 
     //######################### public methods - implementation of RelationsComponent #########################

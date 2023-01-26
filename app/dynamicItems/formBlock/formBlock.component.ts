@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, inject, Injector, ValueProvider, SimpleChanges} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {LayoutComponent, LayoutComponentBase, LayoutComponentMetadata, LayoutComponentRendererSADirective} from '@anglr/dynamic/layout';
-import {LayoutComponentsIteratorService, LayoutEditorMetadata, LayoutEditorMetadataExtractor} from '@anglr/dynamic/layout-editor';
+import {DescendantsGetter, LayoutComponentsIteratorService, LayoutEditorMetadata, LayoutEditorMetadataExtractor} from '@anglr/dynamic/layout-editor';
 import {HostDisplayBlockStyle} from '@anglr/common';
 import {RelationsEditorMetadata, VoidObject} from '@anglr/dynamic/relations-editor';
 import {FormComponentControlBuilder, FORM_COMPONENT_CONTROL} from '@anglr/dynamic/form';
@@ -32,6 +32,7 @@ import {FormBlockLayoutMetadataLoader, FormBlockRelationsMetadataLoader} from '.
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
+@DescendantsGetter<FormBlockComponentOptions>(options => options?.content ? [options?.content] : [])
 @RelationsEditorMetadata(FormBlockRelationsMetadataLoader)
 @LayoutEditorMetadata(FormBlockLayoutMetadataLoader)
 export class FormBlockSAComponent<TValue = any> extends LayoutComponentBase<FormBlockComponentOptions> implements LayoutComponent<FormBlockComponentOptions>
@@ -64,8 +65,8 @@ export class FormBlockSAComponent<TValue = any> extends LayoutComponentBase<Form
     /**
      * Occurs when form is submitted
      */
-    @DynamicOutput()
-    public submit: VoidObject = {};
+    @DynamicOutput({skipInit: true})
+    public submit: VoidObject|undefined|null;
 
     //######################### protected methdos - template bindings #########################
 

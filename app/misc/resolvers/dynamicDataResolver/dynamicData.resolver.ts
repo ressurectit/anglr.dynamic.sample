@@ -25,7 +25,6 @@ export interface DynamicDataResolve<TData = any>
     data?: TData;
 }
 
-
 /**
  * Dynamic data data resolver that uses relations
  */
