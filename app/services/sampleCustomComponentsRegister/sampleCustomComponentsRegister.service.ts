@@ -13,14 +13,14 @@ export const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
 export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfiguration = CustomComponentConfiguration> extends CustomComponentsRegister
 {
     //######################### private fields #########################
-    
+
     /**
      * Used for emitting registered changes
      */
     private _registeredChange: Subject<void> = new Subject<void>();
-    
+
     //######################### public properties #########################
-    
+
     /**
      * Occurs when registered changes
      */
@@ -28,7 +28,7 @@ export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfi
     {
         return this._registeredChange.asObservable();
     }
-    
+
     //######################### constructor #########################
     constructor(@Inject(PERMANENT_STORAGE) private _store: PermanentStorage)
     {
@@ -50,7 +50,7 @@ export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfi
         {
             return;
         }
-            
+
         const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
         customComponents[name] = {} as TConfig;
 
@@ -71,10 +71,10 @@ export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfi
         {
             return;
         }
-        
+
         const customComponents = this._store.get<Dictionary<TConfig>|null>(CUSTOM_COMPONENTS) ?? {};
         delete customComponents[name];
-        
+
         this._store.set(CUSTOM_COMPONENTS, customComponentsNames);
         this._registeredChange.next();
     }
@@ -117,7 +117,7 @@ export class SampleCustomComponentsRegister<TConfig extends CustomComponentConfi
         }
 
         customComponents[name] = config;
-        
+
         this._store.set(CUSTOM_COMPONENTS, customComponents);
         this._registeredChange.next();
     }

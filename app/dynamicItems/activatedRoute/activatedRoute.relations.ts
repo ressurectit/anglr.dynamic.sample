@@ -52,11 +52,7 @@ export class ActivatedRouteRelations implements RelationsComponent<ActivatedRout
         const route = injector.get(ActivatedRoute);
 
         route.params.subscribe(params => this.params = params);
-        route.data.subscribe(data =>
-        {
-            console.log(data);
-            this.data = data;
-        });
+        route.data.subscribe(data => this.data = data);
     }
 
     //######################### public methods - implementation of RelationsComponent #########################
