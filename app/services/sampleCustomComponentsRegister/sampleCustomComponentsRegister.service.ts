@@ -4,7 +4,7 @@ import {PermanentStorage, PERMANENT_STORAGE} from '@anglr/common';
 import {Dictionary} from '@jscrpt/common';
 import {Observable, Subject} from 'rxjs';
 
-const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
+export const CUSTOM_COMPONENTS = 'CUSTOM_COMPONENTS';
 
 /**
  * Sample custom components register

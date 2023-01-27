@@ -3,6 +3,7 @@ import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/rou
 import {provideRelations, RelationsComponentManager, RelationsManager, RelationsProcessor} from '@anglr/dynamic/relations';
 import {provideTinyMceRelations} from '@anglr/dynamic/tinymce-components';
 import {provideHandlebarsRelations} from '@anglr/dynamic/handlebars-components';
+import {provideBasicRelations} from '@anglr/dynamic/basic-components';
 import {provideRestRelations} from '@anglr/dynamic/rest-components';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
 import {Observable} from 'rxjs';
@@ -54,7 +55,7 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
     private _relations: RelationsManager;
 
     /**
-     * Instance of store for resolver relations 
+     * Instance of store for resolver relations
      */
     private _store: StoreDataService<RelationsNodeMetadata[]>;
 
@@ -72,6 +73,7 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
             [
                 createStoreDataServiceFactory('RESOLVER_RELATIONS_DATA'),
                 provideRelations(),
+                provideBasicRelations(),
                 provideHandlebarsRelations(),
                 provideRestRelations(),
                 provideTinyMceRelations(),
@@ -121,7 +123,7 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
                 this._processor.destroyComponent(ActivatedRouteSnapshotRelations.relationsId);
                 this._manager.unregisterComponent(DynamicDataResolverRelations.relationsId);
                 this._manager.unregisterComponent(ActivatedRouteSnapshotRelations.relationsId);
-                
+
                 subscriber.next(result);
                 subscriber.complete();
             })();

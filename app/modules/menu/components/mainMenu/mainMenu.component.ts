@@ -1,16 +1,19 @@
-import {Component, ChangeDetectionStrategy, Injector} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Injector, Inject} from '@angular/core';
 import {Router} from '@angular/router';
+import {PermanentStorage, PERMANENT_STORAGE} from '@anglr/common';
 import {RelationsNodeMetadata} from '@anglr/dynamic/relations-editor';
 import {AuthenticationService} from '@anglr/authentication';
 import {TitledDialogService} from '@anglr/common/material';
+import {Dictionary} from '@jscrpt/common';
 
 import {UserSettingsSAComponent} from '../../../../components';
 import {createStoreDataServiceFactory} from '../../../../misc/factories';
 import {StoreDataService} from '../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
-import {demoDetailLayout, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute} from '../../../../misc/demo';
+import {demoDetailLayout, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute, demoPageCustomComponentLayout, demoPageCustomComponentOptions, demoSampleStylesCustomComponentLayout, demoSampleStylesCustomComponentOptions} from '../../../../misc/demo';
 import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
 import {DYNAMIC_CONTENT_DATA} from '../../../../misc/constants';
+import {CUSTOM_COMPONENTS} from '../../../../services/sampleCustomComponentsRegister';
 
 /**
  * Component used for displaying application main menu
@@ -33,7 +36,8 @@ export class MainMenuComponent
                 private _dialog: TitledDialogService,
                 private _store: StoreDataService<LayoutRelationsMetadata>,
                 private _dynamicRoutes: DynamicRoutesService,
-                private _injector: Injector,)
+                private _injector: Injector,
+                @Inject(PERMANENT_STORAGE) private _permanentStorage: PermanentStorage,)
     {
     }
 
@@ -59,6 +63,45 @@ export class MainMenuComponent
     {
         event.preventDefault();
         event.stopPropagation();
+
+        const customComponents: Dictionary<any> = this._permanentStorage.get(CUSTOM_COMPONENTS) ?? {};
+        let sampleStyles = this._store.getData('sample styles');
+
+        if(!sampleStyles)
+        {
+            sampleStyles =
+            {
+                layout: demoSampleStylesCustomComponentLayout,
+                relations: [],
+            };
+            
+            this._store.setData('sample styles', sampleStyles);
+        }
+
+        let page = this._store.getData('page');
+
+        if(!page)
+        {
+            page =
+            {
+                layout: demoPageCustomComponentLayout,
+                relations: []
+            };
+            
+            this._store.setData('page', page);
+        }
+
+        if(!customComponents['sample styles'])
+        {
+            customComponents['sample styles'] = demoSampleStylesCustomComponentOptions;
+        }
+
+        if(!customComponents['page'])
+        {
+            customComponents['page'] = demoPageCustomComponentOptions;
+        }
+
+        this._permanentStorage.set(CUSTOM_COMPONENTS, customComponents);
 
         let overview = this._store.getData('overview');
 

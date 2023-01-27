@@ -52,6 +52,26 @@ export class ActivatedRouteSnapshotRelations implements RelationsComponent<Activ
     public dataChange: Subject<void> = new Subject<void>();
 
     /**
+     * Indication whether are matrix parameters scoped to this route initialized
+     */
+    public paramsAssigned: boolean = true;
+
+    /**
+     * Indication whether are query parameters shared by all the routes initialized
+     */
+    public queryParamsAssigned: boolean = true;
+
+    /**
+     * Indication whether is URL fragment shared by all the routes initialized
+     */
+    public fragmentAssigned: boolean = true;
+
+    /**
+     * Indication whether is static and resolved data of this route initialized
+     */
+    public dataAssigned: boolean = true;
+
+    /**
      * The matrix parameters scoped to this route.
      */
     public get params(): Params
