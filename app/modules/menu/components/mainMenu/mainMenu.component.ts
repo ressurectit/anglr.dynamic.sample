@@ -10,7 +10,7 @@ import {UserSettingsSAComponent} from '../../../../components';
 import {createStoreDataServiceFactory} from '../../../../misc/factories';
 import {StoreDataService} from '../../../../services/storeData';
 import {LayoutRelationsMetadata} from '../../../../misc/interfaces';
-import {demoDetailLayout, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute, demoPageCustomComponentLayout, demoPageCustomComponentOptions, demoSampleStylesCustomComponentLayout, demoSampleStylesCustomComponentOptions} from '../../../../misc/demo';
+import {demoDetailLayout, demoDetailRelations, demoDetailResolverRelations, demoDetailRoute, demoHomeLayout, demoHomeRoute, demoOverviewLayout, demoOverviewRelations, demoOverviewRoute, demoPageCustomComponentLayout, demoPageCustomComponentOptions, demoSampleStylesCustomComponentLayout, demoSampleStylesCustomComponentOptions} from '../../../../misc/demo';
 import {DynamicRoutesService} from '../../../../services/dynamicRoutes';
 import {DYNAMIC_CONTENT_DATA} from '../../../../misc/constants';
 import {CUSTOM_COMPONENTS} from '../../../../services/sampleCustomComponentsRegister';
@@ -123,7 +123,7 @@ export class MainMenuComponent
             detail =
             {
                 layout: demoDetailLayout,
-                relations: [],
+                relations: demoDetailRelations,
             };
             
             this._store.setData('detail', detail);

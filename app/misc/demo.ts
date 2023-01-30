@@ -410,6 +410,152 @@ export const demoOverviewLayout: LayoutComponentMetadata =
     scope: undefined
 };
 
+export const demoDetailRelations: RelationsNodeMetadata[] =
+[
+    {
+        id: 'deconstruct-pteyfstipnuiouus',
+        name: 'deconstruct',
+        package: 'basic-components',
+        relationsOptions: {
+            properties: [
+                {
+                    name: 'data',
+                    noDefaultValue: true,
+                    skipInit: false,
+                    allowSkipInit: true,
+                    defaultValue: null
+                }
+            ]
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 465,
+                y: 436
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'data',
+                inputs: [
+                    {
+                        id: 'dataTemplate-kuokafkyzilugtlf',
+                        inputName: 'data'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'dataTemplate-kuokafkyzilugtlf',
+        name: 'dataTemplate',
+        package: 'handlebars-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 761,
+                y: 315
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'output',
+                inputs: [
+                    {
+                        id: 'htmlBlock-ntqiiwjrpskpucwn',
+                        inputName: 'content'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'richTextSource-setksfxgpxgmgfvb',
+        name: 'richTextSource',
+        package: 'tinymce-components',
+        relationsOptions: {
+            content: '<p><strong>name</strong>: {{name}}<br><strong>surname</strong>: {{surname}}<br><strong>e-mail</strong>: {{email}}</p>'
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 471,
+                y: 222
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'htmlString',
+                inputs: [
+                    {
+                        id: 'dataTemplate-kuokafkyzilugtlf',
+                        inputName: 'template'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'activatedRoute-lfbhwkvmxnubdbct',
+        name: 'activatedRoute',
+        package: 'sample-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 200,
+                y: 265
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'params',
+                inputs: []
+            },
+            {
+                outputName: 'queryParams',
+                inputs: []
+            },
+            {
+                outputName: 'fragment',
+                inputs: []
+            },
+            {
+                outputName: 'data',
+                inputs: [
+                    {
+                        id: 'deconstruct-pteyfstipnuiouus',
+                        inputName: 'object'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'htmlBlock-ntqiiwjrpskpucwn',
+        name: 'htmlBlock-ntqiiwjrpskpucwn',
+        package: 'layout-components',
+        displayName: 'htmlBlock-ntqiiwjrpskpucwn',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: false,
+            coordinates: {
+                x: 1057,
+                y: 405
+            },
+            options: null
+        },
+        scope: undefined,
+        outputs: []
+    }
+];
+
+
 export const demoOverviewRelations: RelationsNodeMetadata[] =
 [
     {
@@ -426,8 +572,8 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         nodeMetadata: {
             scopeConfigurable: true,
             coordinates: {
-                x: 199,
-                y: 463
+                x: 238,
+                y: 564
             },
             options: null
         },
@@ -438,6 +584,132 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
                     {
                         id: 'trigger-nuqofphqgonmtlxn',
                         inputName: 'Data'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'trigger-qibvuhjlhkwsrmkx',
+        name: 'trigger',
+        package: 'basic-components',
+        relationsOptions: {
+            endpoints: [
+                {
+                    name: 'Data',
+                    defaultValue: null,
+                    skipInit: true,
+                    allowSkipInit: true
+                }
+            ]
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 529,
+                y: 160
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'Data',
+                inputs: [
+                    {
+                        id: 'filterActions-ukgoakthcnghseuo',
+                        inputName: 'setFilter'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'trigger-nuqofphqgonmtlxn',
+        name: 'trigger',
+        package: 'basic-components',
+        relationsOptions: {
+            endpoints: [
+                {
+                    name: 'Data',
+                    defaultValue: null,
+                    skipInit: true,
+                    allowSkipInit: true
+                }
+            ]
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 412,
+                y: 389
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'Data',
+                inputs: [
+                    {
+                        id: 'firstNonNull-xhovqekyrfjwrqqw',
+                        inputName: 'data2'
+                    },
+                    {
+                        id: 'filterActions-ukgoakthcnghseuo',
+                        inputName: 'resetFilter'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'firstNonNull-ipbepspgvbhqvhpt',
+        name: 'firstNonNull',
+        package: 'basic-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 822,
+                y: 479
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'data',
+                inputs: [
+                    {
+                        id: 'dropEmpty-kgoetblrjlxmbdjd',
+                        inputName: 'inputData'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'firstNonNull-xhovqekyrfjwrqqw',
+        name: 'firstNonNull',
+        package: 'basic-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 85.26934984520116,
+                y: 237.7636738906089
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'data',
+                inputs: [
+                    {
+                        id: 'formBlock-gpjxpdbhjxcjptol',
+                        inputName: 'value'
+                    },
+                    {
+                        id: 'firstNonNull-ipbepspgvbhqvhpt',
+                        inputName: 'data2'
                     }
                 ]
             }
@@ -463,8 +735,8 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         nodeMetadata: {
             scopeConfigurable: true,
             coordinates: {
-                x: 796,
-                y: 42
+                x: 1295,
+                y: 79
             },
             options: null
         },
@@ -485,6 +757,87 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         ]
     },
     {
+        id: 'filterActions-ukgoakthcnghseuo',
+        name: 'filterActions',
+        package: 'sample-components',
+        relationsOptions: {
+            setFilterParameter: true
+        },
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 890,
+                y: 100
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'filter',
+                inputs: [
+                    {
+                        id: 'firstNonNull-ipbepspgvbhqvhpt',
+                        inputName: 'data1'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'dropEmpty-kgoetblrjlxmbdjd',
+        name: 'dropEmpty',
+        package: 'sample-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 1069,
+                y: 362
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'data',
+                inputs: [
+                    {
+                        id: 'rest-flemahafjynqojjr',
+                        inputName: 'filter'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'filterParameter-dvqcmwcgucshegmh',
+        name: 'filterParameter',
+        package: 'sample-components',
+        relationsOptions: {},
+        nodeMetadata: {
+            scopeConfigurable: true,
+            coordinates: {
+                x: 112,
+                y: 29
+            },
+            options: null
+        },
+        outputs: [
+            {
+                outputName: 'filter',
+                inputs: [
+                    {
+                        id: 'filterActions-ukgoakthcnghseuo',
+                        inputName: 'initFilter'
+                    },
+                    {
+                        id: 'firstNonNull-xhovqekyrfjwrqqw',
+                        inputName: 'data1'
+                    }
+                ]
+            }
+        ]
+    },
+    {
         id: 'formBlock-gpjxpdbhjxcjptol',
         name: 'formBlock-gpjxpdbhjxcjptol',
         package: 'layout-components',
@@ -493,8 +846,8 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         nodeMetadata: {
             scopeConfigurable: false,
             coordinates: {
-                x: 181,
-                y: 80
+                x: 288,
+                y: 164
             },
             options: null
         },
@@ -529,8 +882,8 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         nodeMetadata: {
             scopeConfigurable: false,
             coordinates: {
-                x: 928,
-                y: 388
+                x: 1497,
+                y: 449
             },
             options: null
         },
@@ -546,8 +899,8 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
         nodeMetadata: {
             scopeConfigurable: false,
             coordinates: {
-                x: 156,
-                y: 284
+                x: 142,
+                y: 411
             },
             options: null
         },
@@ -558,74 +911,6 @@ export const demoOverviewRelations: RelationsNodeMetadata[] =
                     {
                         id: 'trigger-nuqofphqgonmtlxn',
                         inputName: 'trigger'
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'trigger-qibvuhjlhkwsrmkx',
-        name: 'trigger',
-        package: 'basic-components',
-        relationsOptions: {
-            endpoints: [
-                {
-                    name: 'Data',
-                    defaultValue: null,
-                    skipInit: true,
-                    allowSkipInit: true
-                }
-            ]
-        },
-        nodeMetadata: {
-            scopeConfigurable: true,
-            coordinates: {
-                x: 477,
-                y: 77
-            },
-            options: null
-        },
-        outputs: [
-            {
-                outputName: 'Data',
-                inputs: [
-                    {
-                        id: 'rest-flemahafjynqojjr',
-                        inputName: 'filter'
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'trigger-nuqofphqgonmtlxn',
-        name: 'trigger',
-        package: 'basic-components',
-        relationsOptions: {
-            endpoints: [
-                {
-                    name: 'Data',
-                    defaultValue: null,
-                    skipInit: true,
-                    allowSkipInit: true
-                }
-            ]
-        },
-        nodeMetadata: {
-            scopeConfigurable: true,
-            coordinates: {
-                x: 422,
-                y: 372
-            },
-            options: null
-        },
-        outputs: [
-            {
-                outputName: 'Data',
-                inputs: [
-                    {
-                        id: 'formBlock-gpjxpdbhjxcjptol',
-                        inputName: 'value'
                     }
                 ]
             }
@@ -642,75 +927,65 @@ export const demoDetailLayout: LayoutComponentMetadata =
     options: {
         children: [
             {
-                id: 'styleBlock-gdmcpijvblrtyjls',
-                displayName: 'styleBlock-gdmcpijvblrtyjls',
-                package: 'css-components',
-                name: 'styleBlock',
+                id: 'page-kfbikxhzkikxomgp',
+                displayName: 'page-kfbikxhzkikxomgp',
+                package: 'custom-components',
+                name: 'page',
                 options: {
-                    content: {
-                        id: 'stackPanel-xxptnrqmuiwyhqiw',
-                        displayName: 'stackPanel-xxptnrqmuiwyhqiw',
-                        package: 'basic-components',
-                        name: 'stackPanel',
-                        options: {
-                            children: [
-                                {
-                                    id: 'textBlock-myngknoigkbwelkn',
-                                    displayName: 'textBlock-myngknoigkbwelkn',
-                                    package: 'basic-components',
-                                    name: 'textBlock',
-                                    options: {
-                                        text: 'Detail',
-                                        cssClass: 'title',
-                                        margin: {
-                                            top: null,
-                                            right: null,
-                                            bottom: null,
-                                            left: null
-                                        },
-                                        padding: {
-                                            top: null,
-                                            right: null,
-                                            bottom: null,
-                                            left: null
-                                        },
-                                        textStyling: null
-                                    },
-                                    scope: null
-                                },
-                                {
-                                    id: 'stackPanel-ehlcpfegubheevch',
-                                    displayName: 'stackPanel-ehlcpfegubheevch',
+                    name: 'page',
+                    placeholderContainers: {
+                        'placeholder-tejvzbsnwwjjirhu': {
+                            id: 'placeholderContainer-page-kfbikxhzkikxomgp-placeholder-tejvzbsnwwjjirhu',
+                            name: 'placeholderContainer',
+                            package: 'custom-components',
+                            displayName: 'placeholderContainer-page-kfbikxhzkikxomgp-placeholder-tejvzbsnwwjjirhu',
+                            options: {
+                                content: {
+                                    id: 'stackPanel-dvceuovheyncjhew',
+                                    displayName: 'stackPanel-dvceuovheyncjhew',
                                     package: 'basic-components',
                                     name: 'stackPanel',
                                     options: {
-                                        horizontal: true,
-                                        wrap: false,
-                                        children: []
+                                        children: [
+                                            {
+                                                id: 'htmlBlock-ntqiiwjrpskpucwn',
+                                                displayName: 'htmlBlock-ntqiiwjrpskpucwn',
+                                                package: 'basic-components',
+                                                name: 'htmlBlock',
+                                                options: {
+                                                    content: 'name: test\r\nsurname: test\r\ne-mail: test'
+                                                },
+                                                scope: null
+                                            }
+                                        ]
                                     },
                                     scope: null
                                 }
-                            ]
-                        },
-                        scope: null
+                            },
+                            scope: null
+                        }
                     },
-                    style: '.title\r\n{\r\n    fontsiz: 1.3em;\r\n    fontweigh: 500;\r\n    marginbotto: 15px;\r\n    marginlef: 4px;\r\n}\r\n\r\nform-textfielnot:last-child)\r\n{\r\n    marginrigh: 10px;\r\n}\r\n\r\nform-text-field>label\r\n{\r\n   displa: block;\r\n}\r\n\r\nform-text-field>input\r\n{\r\n    borderradiu: 4px;\r\n    borderstyl: solid;\r\n    borderwidt: 1px;\r\n    boxshado: none;\r\n    fontsiz: 12px;  \r\n    paddinglef: 7px;\r\n   widt: 100%;\r\n    fontfamil: "Inter";\r\n}\r\n\r\ntable\r\n{\r\n   widt: 100%;\r\n}'
+                    contentOptions: {
+                        'textBlock-gxlgpmstllxkoouk': {
+                            text: 'Detail'
+                        }
+                    }
                 },
                 scope: null
             }
         ],
         cssClass: null,
         margin: {
-            top: '10px',
+            top: null,
             right: null,
             bottom: null,
             left: null
         },
         padding: {
             top: null,
-            right: '10px',
+            right: null,
             bottom: null,
-            left: '10px'
+            left: null
         },
         textStyling: null
     },

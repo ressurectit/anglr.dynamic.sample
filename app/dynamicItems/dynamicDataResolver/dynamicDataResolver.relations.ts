@@ -38,7 +38,7 @@ export class DynamicDataResolverRelations<TData = any> implements RelationsCompo
     public relationsOptions: DynamicDataResolverRelationsOptions|undefined|null;
 
     //######################### public properties - inputs #########################
-    
+
     /**
      * Data that are used as result of dynamic data resolver
      */
@@ -52,7 +52,7 @@ export class DynamicDataResolverRelations<TData = any> implements RelationsCompo
     public result: Promise<TData|null> = new Promise<TData|null>(resolve => this._resolve = resolve);
 
     //######################### public methods - implementation of RelationsComponent #########################
-    
+
     /**
      * @inheritdoc
      */

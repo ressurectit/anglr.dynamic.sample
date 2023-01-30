@@ -1,0 +1,31 @@
+<relations-node-header [parent]="this" [destroySubject]="destroySubject" name="filter actions"></relations-node-header>
+
+<div class="node-content">
+    <label><input type="checkbox" [formControl]="setFilterParam">set filter parameter</label>
+
+    <div class="inputs-outputs">
+        <div class="inputs">
+            <div class="input">
+                <relation-node-input [parentCoordiantes]="nodePosition" [zoomLevel]="zoomLevel" name="initFilter" [parent]="this"></relation-node-input>
+                <div>init filter</div>
+            </div>
+
+            <div class="input">
+                <relation-node-input [parentCoordiantes]="nodePosition" [zoomLevel]="zoomLevel" name="setFilter" [parent]="this"></relation-node-input>
+                <div>set filter</div>
+            </div>
+
+            <div class="input">
+                <relation-node-input [parentCoordiantes]="nodePosition" [zoomLevel]="zoomLevel" name="resetFilter" [parent]="this"></relation-node-input>
+                <div>reset filter</div>
+            </div>
+        </div>
+
+        <div class="outputs">
+            <div class="output">
+                <div>filter</div>
+                <relation-node-output [parentCoordiantes]="nodePosition" [zoomLevel]="zoomLevel" name="filter" [parent]="this"></relation-node-output>
+            </div>
+        </div>
+    </div>
+</div>

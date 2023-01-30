@@ -59,11 +59,6 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
      */
     private _store: StoreDataService<RelationsNodeMetadata[]>;
 
-    /**
-     * Indication whether are relations initialized
-     */
-    private _relationsInitialized: boolean = false;
-
     //######################### constructor #########################
     constructor(injector: Injector,)
     {
@@ -101,10 +96,9 @@ export class DynamicDataDataResolver<TData = any> implements Resolve<TData>
         const routeSnapshot = new ActivatedRouteSnapshotRelations(route);
         const data = route.data as DynamicRouteData;
 
-        if(data.resolverRelations && !this._relationsInitialized)
+        if(data.resolverRelations)
         {
             this._relations.setRelations(this._store.getData(data.resolverRelations) ?? []);
-            this._relationsInitialized = true;
         }
 
         return new Observable(subscriber =>
