@@ -16,9 +16,8 @@ const LOGGING_SETTINGS_STORAGE = 'logging-settings';
 export class LocalSettingsStorage implements SettingsStorage
 {
     //######################### constructor #########################
-    constructor(@Inject(PERMANENT_STORAGE) private _store: PermanentStorage,)
+    constructor(@Inject(PERMANENT_STORAGE) private _storage: PermanentStorage,)
     {
-
     }
 
     //######################### public methods - implementation of SettingsStorage #########################
@@ -28,7 +27,7 @@ export class LocalSettingsStorage implements SettingsStorage
      */
     public get(): SettingsGeneral
     {
-        let settings = this._store.get<SettingsGeneral>(GENERAL_SETTINGS_STORAGE);
+        let settings = this._storage.get<SettingsGeneral>(GENERAL_SETTINGS_STORAGE);
 
         settings = extend(true,
                           {},
@@ -48,7 +47,7 @@ export class LocalSettingsStorage implements SettingsStorage
      */
     public set(config: SettingsGeneral): void
     {
-        this._store.set(GENERAL_SETTINGS_STORAGE, config);
+        this._storage.set(GENERAL_SETTINGS_STORAGE, config);
     }
 
     /**
@@ -56,7 +55,7 @@ export class LocalSettingsStorage implements SettingsStorage
      */
     public getDebugging(): SettingsDebug
     {
-        let settings = this._store.get<SettingsDebug>(DEBUGGING_SETTINGS_STORAGE);
+        let settings = this._storage.get<SettingsDebug>(DEBUGGING_SETTINGS_STORAGE);
 
         settings = extend(true,
                           {},
@@ -76,7 +75,7 @@ export class LocalSettingsStorage implements SettingsStorage
      */
     public setDebugging(config: SettingsDebug): void
     {
-        this._store.set(DEBUGGING_SETTINGS_STORAGE, config);
+        this._storage.set(DEBUGGING_SETTINGS_STORAGE, config);
     }
 
     /**
@@ -84,7 +83,7 @@ export class LocalSettingsStorage implements SettingsStorage
      */
     public getLogging(): SettingsLogging
     {
-        let settings = this._store.get<SettingsLogging>(LOGGING_SETTINGS_STORAGE);
+        let settings = this._storage.get<SettingsLogging>(LOGGING_SETTINGS_STORAGE);
 
         settings = extend(true,
                           {},
@@ -101,8 +100,8 @@ export class LocalSettingsStorage implements SettingsStorage
      * Sets logging settings object to storage
      * @param config Logging settings object to be stored
      */
-    public setLogging(config: SettingsLogging): void
+    public setLogging(config: SettingsLogging)
     {
-        this._store.set(LOGGING_SETTINGS_STORAGE, config);
+        this._storage.set(LOGGING_SETTINGS_STORAGE, config);
     }
 }

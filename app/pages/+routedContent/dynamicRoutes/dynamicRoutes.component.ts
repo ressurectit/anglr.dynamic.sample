@@ -1,7 +1,8 @@
 import {Component, ChangeDetectionStrategy, ViewChild} from '@angular/core';
 import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
-import {Grid, GridOptions, NoPagingComponent, SyncDataLoaderComponent, SyncDataLoaderOptions} from '@anglr/grid';
+import {Grid, GridOptions, NoPagingSAComponent, SyncDataLoaderSAComponent, SyncDataLoaderOptions} from '@anglr/grid';
 import {setSyncData} from '@anglr/grid/extensions';
+import {RecursivePartial} from '@jscrpt/common';
 
 import {DynamicRoute, DynamicRoutesService} from '../../../services/dynamicRoutes';
 
@@ -24,7 +25,7 @@ export class DynamicRoutesComponent
     /**
      * Represents options for grid
      */
-    protected gridOptions: GridOptions;
+    protected gridOptions: RecursivePartial<GridOptions>;
 
     //######################### protected properties - children #########################
 
@@ -44,7 +45,7 @@ export class DynamicRoutesComponent
             {
                 dataLoader:
                 {
-                    type: SyncDataLoaderComponent,
+                    type: SyncDataLoaderSAComponent,
                     options: <SyncDataLoaderOptions>
                     {
                         data: this._dynamicRoutesSvc.routes,
@@ -52,7 +53,7 @@ export class DynamicRoutesComponent
                 },
                 paging:
                 {
-                    type: NoPagingComponent,
+                    type: NoPagingSAComponent,
                 },
             }
         };

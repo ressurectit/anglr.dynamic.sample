@@ -1,4 +1,4 @@
-import {Dictionary} from '@jscrpt/common';
+import type {Dictionary} from '@jscrpt/common';
 
 import {Configuration, config as cfg} from './config';
 import defaultConfig from '../config/config.json';
@@ -9,7 +9,7 @@ import defaultConfig from '../config/config.json';
  */
 function overrideConfig(override: Configuration)
 {
-    const isPresent = function isPresent(obj: any): boolean
+    const isPresent = function isPresent(obj: unknown): boolean
     {
         return obj !== undefined && obj !== null;
     };

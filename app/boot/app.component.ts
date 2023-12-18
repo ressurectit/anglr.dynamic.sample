@@ -1,57 +1,65 @@
-import {Component, OnDestroy, AfterViewInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Inject, OnInit} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {RouterOutlet} from '@angular/router';
-import {LOGGER, Logger} from '@anglr/common';
-import {consoleAnimationTrigger} from '@anglr/common/structured-log';
-import {AppHotkeysService} from '@anglr/common/hotkeys';
-import {AuthenticationService} from '@anglr/authentication';
+import {Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, Inject, AfterViewInit, OnDestroy} from '@angular/core';
+import {CommonModule, DOCUMENT} from '@angular/common';
+import {RouterModule, RouterOutlet} from '@angular/router';
+import {ConsoleSAComponent, LOGGER, Logger, ProgressIndicatorModule, consoleAnimationTrigger} from '@anglr/common';
+import {AppHotkeysService, HotkeysCheatsheetSAComponent} from '@anglr/common/hotkeys';
+import {InternalServerErrorSAComponent} from '@anglr/error-handling';
+import {NotificationsGlobalModule} from '@anglr/notifications';
 import {fadeInOutTrigger} from '@anglr/animations';
+import {AuthenticationService} from '@anglr/authentication';
 import {nameof} from '@jscrpt/common';
 import {TranslateService} from '@ngx-translate/core';
-import {Hotkey} from 'angular2-hotkeys';
 import {Subscription} from 'rxjs';
+import {Hotkey} from 'angular2-hotkeys';
 
+import {MenuModule} from '../modules';
 import {loaderTrigger, routeAnimationTrigger} from './app.component.animations';
-import {SettingsService} from '../services/settings';
-import {SettingsGeneral, SettingsDebug} from '../config';
+import {SettingsDebug, SettingsGeneral} from '../config';
 import version from '../../config/version.json';
-import {DynamicRoutesService} from '../services/dynamicRoutes';
+import {SettingsService} from '../services/settings';
 
 /**
- * Application entry component
+ * Application root component
  */
 @Component(
 {
     selector: 'app',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss'],
+    standalone: true,
+    imports:
+    [
+        CommonModule,
+        RouterModule,
+        InternalServerErrorSAComponent,
+        ProgressIndicatorModule,
+        NotificationsGlobalModule,
+        MenuModule,
+        ConsoleSAComponent,
+        HotkeysCheatsheetSAComponent,
+    ],
     animations: [routeAnimationTrigger, fadeInOutTrigger, consoleAnimationTrigger, loaderTrigger],
     providers: [AppHotkeysService],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy
+export class AppSAComponent implements AfterViewInit, OnDestroy
 {
     //######################### private fields #########################
-    
+
     /**
      * Subscription for router outlet activation changes
      */
     private _routerOutletActivatedSubscription: Subscription|undefined|null;
 
     /**
-     * Subscription for authenticated changes
-     */
-    private _authChangedSubscription: Subscription|undefined|null;
-
-    /**
      * Subscription for changes of general settings
      */
-    private _settingsChangeSubscription: Subscription|undefined|null;
+    private _settingsChangeSubscription: Subscription;
 
     /**
      * Subscription for changes of debugging settings
      */
-    private _settingsDebuggingChangeSubscription: Subscription|undefined|null;
+    private _settingsDebuggingChangeSubscription: Subscription;
 
     /**
      * Currently active theme
@@ -64,11 +72,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
      * Indication whether is console visible
      */
     public consoleVisible: boolean = false;
-
-    /**
-     * Indication whether is used authenticated
-     */
-    public authenticated: boolean = false;
 
     /**
      * Name of state for routed component animation
@@ -101,14 +104,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
      * Router outlet that is used for loading routed components
      */
     @ViewChild('outlet')
-    public routerOutlet: RouterOutlet|undefined;
+    public routerOutlet: RouterOutlet|undefined|null;
 
     //######################### constructor #########################
     constructor(_authSvc: AuthenticationService,
                 translateSvc: TranslateService,
                 private _changeDetector: ChangeDetectorRef,
                 private _appHotkeys: AppHotkeysService,
-                private _dynamicRoutes: DynamicRoutesService,
                 settings: SettingsService,
                 @Inject(LOGGER) logger: Logger,
                 @Inject(DOCUMENT) document: Document,)
@@ -119,7 +121,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
         this._theme = settings.settings.theme;
 
         this._settingsChangeSubscription = settings.settingsChange
-            .subscribe(itm => 
+            .subscribe(itm =>
             {
                 if(itm == nameof<SettingsGeneral>('theme'))
                 {
@@ -136,7 +138,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
             });
 
         this._settingsDebuggingChangeSubscription = settings.settingsDebuggingChange
-            .subscribe(itm => 
+            .subscribe(itm =>
             {
                 if(itm == nameof<SettingsDebug>('consoleEnabled'))
                 {
@@ -147,44 +149,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
         translateSvc.setDefaultLang('en');
         translateSvc.use(settings.settings.language);
 
-        _authSvc
-            .getUserIdentity()
-            .then(identity =>
-            {
-                this.authenticated = identity.isAuthenticated;
-
-                _changeDetector.detectChanges();
-            });
-
-        this._authChangedSubscription = _authSvc.authenticationChanged.subscribe(identity =>
-        {
-            this.authenticated = identity.isAuthenticated;
-
-            _changeDetector.detectChanges();
-        });
-
         if(settings.settingsDebugging?.consoleEnabled)
         {
             this._toggleConsoleHotkey();
         }
     }
 
-    //######################### public methods - implementation of OnInit #########################
-    
-    /**
-     * Initialize component
-     */
-    public async ngOnInit(): Promise<void>
-    {
-        await this._dynamicRoutes.initialize();
-    }
-
     //######################### public methods - implementation of AfterViewInit #########################
-    
+
     /**
      * Called when view was initialized
      */
-    public ngAfterViewInit(): void
+    public ngAfterViewInit()
     {
         this._routerOutletActivatedSubscription = this.routerOutlet?.activateEvents.subscribe(() =>
         {
@@ -195,7 +171,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
     }
 
     //######################### public methods - implementation of OnDestroy #########################
-    
+
     /**
      * Called when component is destroyed
      */
@@ -204,14 +180,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy
         this._routerOutletActivatedSubscription?.unsubscribe();
         this._routerOutletActivatedSubscription = null;
 
-        this._authChangedSubscription?.unsubscribe();
-        this._authChangedSubscription = null;
-
         this._settingsChangeSubscription?.unsubscribe();
-        this._settingsChangeSubscription = null;
-
         this._settingsDebuggingChangeSubscription?.unsubscribe();
-        this._settingsDebuggingChangeSubscription = null;
 
         this._appHotkeys.destroy();
     }

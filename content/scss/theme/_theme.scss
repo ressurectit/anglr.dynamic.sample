@@ -1,32 +1,29 @@
-@use 'sass:meta';
-
-@use '../vars';
 @use './themeColors' as themeColors;
 
+@use '@anglr/common/styles' as anglrCommon;
 @use '@anglr/datetime/styles' as datetime;
 @use '@anglr/dynamic/styles' as dynamic;
-@use '../../../node_modules/@anglr/common/styles/dark-colors-vars';
-@use '../../../node_modules/@anglr/common/styles/light-colors-vars';
+@use '@anglr/grid/styles' as grid;
 
 $theme: () !default;
 $themeName: null !default;
 $dateTimeTheme: null !default;
 $dynamicTheme: null !default;
-$tooltipTheme: 'dark' !default;
-$multiButtonTheme: 'light' !default;
+$anglrCommonTheme: null !default;
+$gridTheme: null !default;
 
 //---------------------- PAGE STYLING ----------------------
 .app-page.#{$themeName}
 {
-    @extend .multibutton-#{$multiButtonTheme}-theme;
-
     //############## THEME ##############
 
     @include themeColors.buildThemeColors($theme);
 
     //############## PACKAGES ##############
 
+    @include anglrCommon.buildThemeColorsTooltip($anglrCommonTheme);
+    @include anglrCommon.buildThemeColorsMultiButton($anglrCommonTheme);
     @include datetime.buildThemeColors($dateTimeTheme);
     @include dynamic.buildThemeColors($dynamicTheme);
-    @include meta.load-css("../../../node_modules/@anglr/common/styles/positions/#{$tooltipTheme}");
+    @include grid.buildThemeColors($gridTheme);
 }

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef, Optional, OnInit, OnDestroy} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {GoBackModule, TooltipModule} from '@anglr/common';
+import {GoBackSADirective, TooltipModule} from '@anglr/common';
 import {AuthorizationModule} from '@anglr/authentication';
 import {TitledDialogService} from '@anglr/common/material';
 import {ShowCustomComponentOptionsSADirective} from '@anglr/dynamic/layout-relations';
@@ -22,7 +22,7 @@ import {lastValueFrom, Subscription} from 'rxjs';
     imports:
     [
         CommonModule,
-        GoBackModule,
+        GoBackSADirective,
         TooltipModule,
         AuthorizationModule,
         ShowCustomComponentOptionsSADirective,

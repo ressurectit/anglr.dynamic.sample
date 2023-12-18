@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpRequest, HttpResponse} from '@angular/common/http';
-import {RESTClient, BaseUrl, DefaultHeaders, MockLogger, JsonContentType, DisableMiddleware, DisableInterceptor, POST, Body, MockLoggerMiddleware} from '@anglr/rest';
+import {RESTClient, BaseUrl, DefaultHeaders, MockLogger, JsonContentType, DisableMiddleware, DisableInterceptor, POST, Body, MockLoggerMiddleware, LoggerMiddleware} from '@anglr/rest';
 import {ClientErrorHandlingMiddleware} from '@anglr/error-handling/rest';
 import {AuthInterceptor, SuppressAuthInterceptor} from '@anglr/authentication';
 import {isBlank, isString} from '@jscrpt/common';
+import {lastValueFrom} from '@jscrpt/common/rxjs';
 import {NEVER, Observable} from 'rxjs';
 
 import {config} from '../../../config';
@@ -61,13 +62,12 @@ export class RestMockLoggerService extends RESTClient implements MockLogger
             responseString = JSON.stringify(response.body, null, 4);
         }
         
-        return await this
+        return await lastValueFrom(this
             ._logResponse(
             {
                 url: request.url,
                 response: responseString
-            })
-            .toPromise()
+            }))
             .catch(_ => console.warn('Failed to log mock data'));
     }
 
@@ -79,6 +79,7 @@ export class RestMockLoggerService extends RESTClient implements MockLogger
      */
     @JsonContentType()
     @DisableMiddleware(ClientErrorHandlingMiddleware)
+    @DisableMiddleware(LoggerMiddleware)
     @DisableMiddleware(MockLoggerMiddleware)
     @DisableInterceptor(AuthInterceptor)
     @DisableInterceptor(SuppressAuthInterceptor)

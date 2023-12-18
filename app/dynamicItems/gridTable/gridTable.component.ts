@@ -3,10 +3,10 @@ import {RouterModule} from '@angular/router';
 import {LayoutComponent, LayoutComponentBase} from '@anglr/dynamic/layout';
 import {LayoutEditorMetadata} from '@anglr/dynamic/layout-editor';
 import {HostDisplayBlockStyle} from '@anglr/common';
-import {Grid, GridComponent, GridModule, GridOptions, NoPagingComponent, SimpleOrdering, SyncDataLoaderComponent, SyncDataLoaderOptions} from '@anglr/grid';
+import {Grid, GridSAComponent, GridModule, GridOptions, NoPagingSAComponent, SimpleOrdering, SyncDataLoaderSAComponent, SyncDataLoaderOptions} from '@anglr/grid';
 import {setSyncData} from '@anglr/grid/extensions';
 import {RelationsEditorMetadata} from '@anglr/dynamic/relations-editor';
-import {nameof, PromiseOr} from '@jscrpt/common';
+import {nameof, PromiseOr, RecursivePartial} from '@jscrpt/common';
 
 import {GridTableComponentOptions} from './gridTable.options';
 import {GridTableLayoutMetadataLoader, GridTableRelationsMetadataLoader} from './gridTable.metadata';
@@ -43,15 +43,15 @@ export class GridTableSAComponent<TData = any> extends LayoutComponentBase<GridT
     /**
      * Instance of grid options
      */
-    protected gridOptions: GridOptions =
+    protected gridOptions: RecursivePartial<GridOptions> =
     {
         plugins:
         {
             dataLoader:
             {
                 //use sync data loader as grid data loader plugin
-                type: SyncDataLoaderComponent,
-                options: <SyncDataLoaderOptions<TData, SimpleOrdering>>
+                type: SyncDataLoaderSAComponent,
+                options: <RecursivePartial<SyncDataLoaderOptions<TData, SimpleOrdering>>>
                 {
                     //all data used in data loader
                     data: [],
@@ -59,7 +59,7 @@ export class GridTableSAComponent<TData = any> extends LayoutComponentBase<GridT
             },
             paging:
             {
-                type: NoPagingComponent,
+                type: NoPagingSAComponent,
             }
         }
     };
@@ -69,7 +69,7 @@ export class GridTableSAComponent<TData = any> extends LayoutComponentBase<GridT
     /**
      * Instance of grid
      */
-    @ViewChild(GridComponent)
+    @ViewChild(GridSAComponent)
     protected grid: Grid|undefined|null;
 
     //######################### public methods - implementation of AfterViewInit #########################

@@ -12,10 +12,10 @@ import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import TerserPlugin from 'terser-webpack-plugin';
 import {AngularWebpackPlugin} from '@ngtools/webpack';
 import linkerPlugin from '@angular/compiler-cli/linker/babel';
-import asyncGeneratorFunctions from '@babel/plugin-proposal-async-generator-functions';
+import asyncGeneratorFunctions from '@babel/plugin-transform-async-generator-functions';
 import asyncToGenerator from '@babel/plugin-transform-async-to-generator';
-import {HmrLoader} from '@angular-devkit/build-angular/src/webpack/plugins/hmr/hmr-loader.js';
-import {JavaScriptOptimizerPlugin} from '@angular-devkit/build-angular/src/webpack/plugins/javascript-optimizer-plugin.js';
+import {HmrLoader} from '@angular-devkit/build-angular/src/tools/webpack/plugins/hmr/hmr-loader.js';
+import {JavaScriptOptimizerPlugin} from '@angular-devkit/build-angular/src/tools/webpack/plugins/javascript-optimizer-plugin.js';
 import {dirName, numeralResolve, cryptoBrowserifyResolve, bufferResolve, streamBrowserifyResolve, ngVersion, tsConfig, webpackConfig} from './webpack.commonjs.cjs';
 
 /**
@@ -28,7 +28,7 @@ function getEntries(ssr, css)
     if(ssr)
     {
         return {
-            server: path.join(dirName, 'app/main.server.ts')
+            server: path.join(dirName, './app/main.server')
         };
     }
     else
@@ -37,11 +37,11 @@ function getEntries(ssr, css)
         {
             ...css ?
             {
-                style: [path.join(dirName, 'content/site.scss'),
-                        path.join(dirName, 'content/dark.scss'),
-                        path.join(dirName, 'content/light.scss')]
+                style: ['./content/site.scss',
+                        './content/dark.scss',
+                        './content/light.scss']
             } : {},
-            client: [path.join(dirName, 'app/main.browser.ts')]
+            client: ['./app/main.browser']
         };
 
         return entries;
@@ -68,16 +68,16 @@ const angularEntryFile = 'main.browser.bootstrap.ts';
 
 export default [function(options, args)
 {
-    var prod = args && args.mode == 'production' || false;
-    var hmr = !!options && !!options.hmr;
-    var ssr = !!options && !!options.ssr;
-    var debug = !!options && !!options.debug;
-    var css = !!options && !!options.css;
-    var html = !!options && !!options.html;
-    var nomangle = !!options && !!options.nomangle;
-    var noCache = !!options && !!options.noCache;
-    var esbuild = !!options && !!options.esbuild;
-    var ngsw = process.env.NGSW == 'true';
+    const prod = args && args.mode == 'production' || false;
+    const hmr = !!options && !!options.hmr;
+    const ssr = !!options && !!options.ssr;
+    const debug = !!options && !!options.debug;
+    const css = !!options && !!options.css;
+    const html = !!options && !!options.html;
+    const nomangle = !!options && !!options.nomangle;
+    const noCache = !!options && !!options.noCache;
+    const esbuild = !!options && !!options.esbuild;
+    const ngsw = process.env.NGSW == 'true';
     const distPath = prod ? 'www' : 'wwwroot/dist';
 
     if(!!options && options.ngsw != undefined)
@@ -130,7 +130,7 @@ export default [function(options, args)
                             warnings: false
                         },
                         progress: true,
-                    }
+                    },
                 },
                 devtool: 'eval-source-map'
             } :
@@ -180,10 +180,9 @@ export default [function(options, args)
                 "modernizr": path.join(dirName, "content/external/scripts/modernizr-custom.js"),
                 "numeral-languages": path.join(dirName, "node_modules/numeral/locales.js"),
                 "handlebars": path.join(dirName, "node_modules/handlebars/dist/handlebars.js"),
-                "app": path.join(dirName, "app")
             },
-            mainFields: ssr ? ['esm2015', 'es2015', 'jsnext:main', 'module', 'main'] : ['esm2020', 'esm2015', 'es2015', 'jsnext:main', 'browser', 'module', 'main'],
-            conditionNames: ['esm2020', 'es2015', 'import']
+            mainFields: ssr ? ['esm2022', 'esm2015', 'es2015', 'jsnext:main', 'module', 'main'] : ['esm2022', 'es2022', 'esm2020', 'esm2015', 'es2015', 'jsnext:main', 'browser', 'module', 'main'],
+            conditionNames: ['esm2022', 'es2022', 'esm2020', 'es2015', 'import']
         },
         module:
         {
@@ -250,7 +249,7 @@ export default [function(options, args)
                     resolve:
                     {
                         fullySpecified: false
-                    }
+                    },
                 },
                 {
                     test: /\.html$/,
@@ -273,7 +272,7 @@ export default [function(options, args)
                     use: ['raw-loader'],
                     include:
                     [
-                        path.join(dirName, 'packages')
+                        path.join(dirName, 'packages'),
                     ]
                 },
                 {
@@ -282,7 +281,7 @@ export default [function(options, args)
                     exclude:
                     [
                         path.join(dirName, 'app'),
-                        path.join(dirName, 'packages')
+                        path.join(dirName, 'packages'),
                     ]
                 },
                 {
@@ -296,7 +295,7 @@ export default [function(options, args)
                 {
                     test: /\.(ttf|woff|woff2|eot|svg|png|jpeg|jpg|bmp|gif|icon|ico)$/,
                     type: 'asset/resource'
-                }
+                },
             ]
         },
         plugins:
@@ -311,6 +310,7 @@ export default [function(options, args)
                 ...prod ? {ngDevMode: false} : {},
                 ngI18nClosureMode: false,
                 ngDesignerMetadata: true,
+                ngRelationsDebugger: false,
                 ngDynamicMonacoPath: prod ? JSON.stringify('www') : JSON.stringify('dist'),
             }),
             new MiniCssExtractPlugin(
@@ -322,8 +322,8 @@ export default [function(options, args)
             {
                 tsConfigPath: path.join(dirName, 'tsconfig.json'),
                 sourceMap: true,
-            })
-        ]
+            }),
+        ],
     };
 
     if(prod && esbuild)

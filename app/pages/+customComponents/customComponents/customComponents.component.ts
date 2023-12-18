@@ -1,9 +1,10 @@
 import {Component, ChangeDetectionStrategy, ViewChild} from '@angular/core';
 import {ComponentRouteAuthorized, Authorize} from '@anglr/authentication';
-import {Grid, GridOptions, NoPagingComponent, SyncDataLoaderComponent, SyncDataLoaderOptions} from '@anglr/grid';
+import {Grid, GridOptions, NoPagingSAComponent, SyncDataLoaderSAComponent, SyncDataLoaderOptions} from '@anglr/grid';
 import {TitledDialogService} from '@anglr/common/material';
 import {setSyncData} from '@anglr/grid/extensions';
 import {lastValueFrom} from '@jscrpt/common/rxjs';
+import {RecursivePartial} from '@jscrpt/common';
 
 import {NewCustomComponentSAComponent} from '../misc/components';
 import {SampleCustomComponentsRegister} from '../../../services/sampleCustomComponentsRegister';
@@ -35,7 +36,7 @@ export class CustomComponentsComponent
     /**
      * Represents options for grid
      */
-    protected gridOptions: GridOptions;
+    protected gridOptions: RecursivePartial<GridOptions>;
 
     //######################### protected properties - children #########################
 
@@ -57,7 +58,7 @@ export class CustomComponentsComponent
             {
                 dataLoader:
                 {
-                    type: SyncDataLoaderComponent,
+                    type: SyncDataLoaderSAComponent,
                     options: <SyncDataLoaderOptions>
                     {
                         data: this._customComponents.getRegisteredComponents().map(itm => ({name: itm})),
@@ -65,7 +66,7 @@ export class CustomComponentsComponent
                 },
                 paging:
                 {
-                    type: NoPagingComponent,
+                    type: NoPagingSAComponent,
                 },
             }
         };

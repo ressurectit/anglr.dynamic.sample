@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {RESTClient, BaseUrl, DefaultHeaders, POST, JsonContentType, Body, DisableInterceptor, ParameterTransform, DisableMiddleware} from '@anglr/rest';
-import {LoggerRestClient, RestLog} from '@anglr/common/structured-log';
+import {RESTClient, BaseUrl, DefaultHeaders, POST, JsonContentType, Body, DisableInterceptor, ParameterTransform, DisableMiddleware, LoggerMiddleware} from '@anglr/rest';
 import {AuthInterceptor, SuppressAuthInterceptor} from '@anglr/authentication';
 import {ClientErrorHandlingMiddleware} from '@anglr/error-handling/rest';
-import {EMPTY, Observable, catchError} from 'rxjs';
+import {LoggerRestClient, RestLog} from '@anglr/common';
+import {EMPTY, NEVER, Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 import {config} from '../../../config';
 import version from '../../../../config/version.json';
@@ -39,13 +40,14 @@ export class RestLoggerService extends RESTClient implements LoggerRestClient
      * @param logs - Array of logs to be logged
      */
     @JsonContentType()
+    @DisableMiddleware(LoggerMiddleware)
     @DisableMiddleware(ClientErrorHandlingMiddleware)
     @DisableInterceptor(AuthInterceptor)
     @DisableInterceptor(SuppressAuthInterceptor)
     @POST('logger')
     public _log(@Body @ParameterTransform('_unhandledErrorsTransform') _logs: RestLog[]): Observable<void>
     {
-        return EMPTY;
+        return NEVER;
     }
 
     //######################### private methods #########################
